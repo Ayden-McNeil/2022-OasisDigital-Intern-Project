@@ -8,13 +8,16 @@ public class GameManager : MonoBehaviour{
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
+    //public TextMeshProUGUI gameOverText;
 
     private int score = 0;
     public float time = 30;
+    public bool isGameOver;
 
     // Start is called before the first frame update
     void Start()
     {
+        isGameOver = false;
         scoreText.text = score.ToString();
     }
 
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour{
     void Update()
     {
         Timer();
+        //GameOver();
     }
 
     public void ScoreKeeper(int pointsAdded){
@@ -35,9 +39,19 @@ public class GameManager : MonoBehaviour{
         {
             time -= Time.deltaTime;
             timerText.text = Mathf.RoundToInt(time).ToString();
+            
+        }else{
+            isGameOver = true;
         }
         
     }
+
+    /*
+    private void GameOver(){
+        if(isGameOver){
+            gameOverText.gameObject.SetActive(true);
+        }
+    */
 
 
 
