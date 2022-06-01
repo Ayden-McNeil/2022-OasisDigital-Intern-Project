@@ -1,9 +1,10 @@
-name: Build project
+name: Build project with preview URL
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
+  workflow_dispatch:
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -92,9 +93,11 @@ jobs:
 
       - run: cd svelte-app && npm run build
 
-      - uses: w9jds/firebase-action@master
+      - name: Deploy to Firebase and Create Preview URL
+        id: deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: "${{ secrets.FB_TOKEN }}"
-          PROJECT_PATH: "./svelte-app"
+          firebaseServiceAccount: "${{ secrets.FB_SERVICE_ACCOUNT }}"
+          expires: 10d
+          channelId: ${{ steps.string.outputs.lowercase }}
+          entryPoint: "./svelte-app"
