@@ -5,15 +5,16 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
+    static private SpawnManager spawnManagerScript;
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(StartLife());
+        spawnManagerScript = FindObjectOfType<SpawnManager>();
     }
 
-    IEnumerator StartLife()
+    private void OnMouseDown()
     {
-        yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
+        spawnManagerScript.SpawnTargets();
     }
 }
