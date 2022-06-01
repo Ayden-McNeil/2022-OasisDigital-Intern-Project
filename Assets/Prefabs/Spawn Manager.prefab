@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3915761249267800270, guid: 89d626121d0e171448c6920ef583eed2, type: 3}
-  delay: 0.5
-  gridHeight: 10
-  gridLength: 10
+  delay: 0
+  gridHeight: 6
+  gridLength: 6
+  startingTargetNumber: 5

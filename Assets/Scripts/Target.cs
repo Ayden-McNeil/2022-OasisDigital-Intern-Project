@@ -14,7 +14,9 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
         spawnManagerScript.SpawnTargets();
+        spawnManagerScript.RemovePostionFromList(transform.position);
+        Destroy(gameObject);
+
     }
 }

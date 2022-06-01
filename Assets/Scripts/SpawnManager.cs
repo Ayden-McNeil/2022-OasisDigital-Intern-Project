@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int gridHeight;
     [SerializeField] private int gridLength;
     [SerializeField] private int startingTargetNumber;
+    private List<Vector3> targetFilledPositions = new List<Vector3>();
 
     private void Start()
     {
@@ -25,7 +26,31 @@ public class SpawnManager : MonoBehaviour
 
     Vector3 GenerateRandomPosition()
     {
-        return new Vector3(Random.Range(-gridLength/2, gridLength/2), Random.Range(-gridHeight / 2, gridHeight / 2), 0);
+        Vector3 position;
+        do
+        {
+            position = new Vector3(Random.Range(-gridLength / 2, gridLength / 2), Random.Range(-gridHeight / 2, gridHeight / 2), 0);
+        }
+        while (CheckIfPositionsIsInTargetFilledPositions(position));
+        targetFilledPositions.Add(position);
+        return position;
+    }
+
+    public void RemovePostionFromList(Vector3 position)
+    {
+        targetFilledPositions.Remove(position);
+    }
+
+    private bool CheckIfPositionsIsInTargetFilledPositions(Vector3 position)
+    {
+        for (int i = 0; i < targetFilledPositions.Count; i++)
+        {
+            if (position == targetFilledPositions[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
