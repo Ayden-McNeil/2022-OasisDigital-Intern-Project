@@ -3476,9 +3476,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3727843102352398003, guid: 5bc579ad3aa843243b47dd4356330280, type: 3}
-      propertyPath: m_Name
-      value: Main Camera
+    - target: {fileID: 282483177918224124, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 8385695026869177935, guid: 3958a01b9fea7e34a9c9a96e80292eec, type: 3}
+    - target: {fileID: 282483177918224124, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
+      propertyPath: startingTargetNumber
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3727843102352398006, guid: 5bc579ad3aa843243b47dd4356330280, type: 3}
       propertyPath: m_RootOrder
