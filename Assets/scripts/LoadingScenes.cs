@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScenes : MonoBehaviour{
 
-    //Load any scene that that is inputted
+    //Load any scene that is inputted
     public void LoadScene(string scene){
         SceneManager.LoadScene(scene);
     }
