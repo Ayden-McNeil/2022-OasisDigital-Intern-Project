@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 56138701}
   - component: {fileID: 56138700}
   m_Layer: 5
-  m_Name: Main Menu Button
+  m_Name: Main Menu Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,14 +1143,6 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &480323915
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 480323911}
-  m_CullTransparentMesh: 1
---- !u!1001 &604358068
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1211,24 +1203,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc579ad3aa843243b47dd4356330280, type: 3}
---- !u!1 &705507993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 500241518}
-  - component: {fileID: 500241520}
-  - component: {fileID: 500241519}
-  m_Layer: 5
-  m_Name: endhighscoreHeader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &500241518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1992,7 +1966,7 @@ GameObject:
   - component: {fileID: 966810049}
   - component: {fileID: 966810048}
   m_Layer: 5
-  m_Name: Restart Button
+  m_Name: Restart Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
