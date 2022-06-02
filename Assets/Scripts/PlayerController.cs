@@ -12,17 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float ySensitivity = 10f;
     public Camera playerCamera;
     public float sensVar;
-  public int fovVar;
-  sceneVarPassover scenePassoverObject;
+    public int fovVar;
 
-  private void Awake()
+    private void Start()
     {
-        scenePassoverObject = GameObject.Find("VarPassoverEmptyGameObject").GetComponent<sceneVarPassover>();
         Cursor.lockState = CursorLockMode.Locked;
+        sensVar = sceneVarPassover.sens;
+        fovVar = sceneVarPassover.fov;
         playerCamera.fieldOfView = fovVar;
-        sensVar = scenePassoverObject.sens;
-        fovVar = scenePassoverObject.fov;
-        Debug.Log(fovVar);
     }
 
     private void Update()
@@ -30,7 +27,6 @@ public class PlayerController : MonoBehaviour
         xMouse = Input.GetAxis("Mouse X") * Time.deltaTime * xSensitivity * sensVar;
         yMouse = Input.GetAxis("Mouse Y") * Time.deltaTime * ySensitivity * sensVar;
         
-
         xRotation -= yMouse;
         yRotation += xMouse;
         xRotation = Mathf.Clamp(xRotation, -90, 90);

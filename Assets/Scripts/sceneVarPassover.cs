@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class sceneVarPassover : MonoBehaviour
 {
-  public int fov;
-  public float sens;
-  public GameObject thisgameObject;
+    public static int fov;
+    public static float sens;
 
-  void Start()
-  {
-    DontDestroyOnLoad(thisgameObject);
-  }
-
-  public void getValues()
-  {
-    fov = FOVController.FOVVar;
-    sens = mouseSensControl.sensVar;
-    Debug.Log(fov + "   " + sens); 
-  }
+    public void getValues()
+    {
+        fov = FOVController.FOVVar;
+        sens = mouseSensControl.sensVar;
+        Debug.Log(fov + "   " + sens); 
+    }
 }
