@@ -11,7 +11,7 @@ public class mouseSensControl : MonoBehaviour
   public Slider senSlider;
   public static float sensVar = 2;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
     sensInput.onValueChanged.AddListener(delegate { changeValue(); });
     senSlider.onValueChanged.AddListener(delegate { changeValueSlider(); });

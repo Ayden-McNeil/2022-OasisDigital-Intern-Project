@@ -9,9 +9,9 @@ public class FOVController : MonoBehaviour
 
   public TMP_InputField FOVInput;
   public Slider FOVSlider;
-  public static int FOVVar = 90;
+  public static int FOVVar;
 
-  void Start()
+  void Awake()
     {
     FOVInput.onValueChanged.AddListener(delegate { changeValue(); });
     FOVSlider.onValueChanged.AddListener(delegate { changeValueSlider(); });
@@ -22,11 +22,13 @@ public class FOVController : MonoBehaviour
   {
     FOVSlider.value = float.Parse(FOVInput.text);
     FOVVar = (int)FOVSlider.value;
+    Debug.Log("this is when it is set not in the camera " + FOVVar);
   }
 
   public void changeValueSlider()
   {
     FOVInput.text = FOVSlider.value.ToString();
     FOVVar = int.Parse(FOVInput.text);
+    Debug.Log("this is when it is set not in the camera " + FOVVar);
   }
 }
