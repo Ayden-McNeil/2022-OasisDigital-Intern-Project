@@ -6,26 +6,24 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour{
 
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timerText;
-    //public TextMeshProUGUI gameOverText;
+    [SerializeField]private TextMeshProUGUI scoreText;
+    [SerializeField]private TextMeshProUGUI timerText;
+    //[SerializeField]private GameObject endPanel; // uncomment once the restart screen is done and alther to liking 
 
     private int score = 0;
-    public float time = 30;
     public bool isGameOver;
+    [SerializeField]private float time = 30;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         isGameOver = false;
         scoreText.text = score.ToString();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         Timer();
-        //GameOver();
+        GameOver();
     }
 
     public void ScoreKeeper(int pointsAdded){
@@ -34,11 +32,9 @@ public class GameManager : MonoBehaviour{
     }
 
     private void Timer(){
-        
-        if (time > 0)
-        {
+        if (time > 0){
             time -= Time.deltaTime;
-            timerText.text = Mathf.RoundToInt(time).ToString();
+            timerText.text = Mathf.RoundToInt(time).ToString();  //rounds to the nearest integer
             
         }else{
             isGameOver = true;
@@ -46,12 +42,12 @@ public class GameManager : MonoBehaviour{
         
     }
 
-    /*
+    
     private void GameOver(){
         if(isGameOver){
-            gameOverText.gameObject.SetActive(true);
+            //endPanel.gameObject.SetActive(true);// // uncomment once the restart screen is done and alther to liking 
         }
-    */
+    }
 
 
 
