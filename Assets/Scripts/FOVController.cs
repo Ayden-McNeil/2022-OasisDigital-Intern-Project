@@ -9,8 +9,8 @@ public class FOVController : MonoBehaviour
 
   public TMP_InputField FOVInput;
   public Slider FOVSlider;
+  public static int FOVVar = 90;
 
-  // Start is called before the first frame update
   void Start()
     {
     FOVInput.onValueChanged.AddListener(delegate { changeValue(); });
@@ -18,18 +18,15 @@ public class FOVController : MonoBehaviour
     FOVInput.text = "90";
   }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void changeValue()
-    {
-      FOVSlider.value = float.Parse(FOVInput.text);
-    }
+  public void changeValue()
+  {
+    FOVSlider.value = float.Parse(FOVInput.text);
+    FOVVar = (int)FOVSlider.value;
+  }
 
-    public void changeValueSlider()
-    {
-      FOVInput.text = FOVSlider.value.ToString();
-    }
+  public void changeValueSlider()
+  {
+    FOVInput.text = FOVSlider.value.ToString();
+    FOVVar = int.Parse(FOVInput.text);
+  }
 }
