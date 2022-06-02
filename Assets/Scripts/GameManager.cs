@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour{
     private int score = 0;
     public float time = 30;
     public bool isGameOver;
+    public bool isGamePaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour{
     void Update()
     {
         Timer();
+        PauseFunction();
         //GameOver();
     }
 
@@ -44,6 +46,36 @@ public class GameManager : MonoBehaviour{
             isGameOver = true;
         }
         
+    }
+
+    private void PauseFunction()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (isGamePaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+
+    private void Resume()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        Debug.Log("Resume");
+    }
+
+    private void Pause()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0f;
+        Debug.Log("Pause");
+
     }
 
     /*

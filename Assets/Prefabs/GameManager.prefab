@@ -47,3 +47,5 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   timerText: {fileID: 0}
   time: 5
+  isGameOver: 0
+  isGamePaused: 0
