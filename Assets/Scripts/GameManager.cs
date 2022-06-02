@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour{
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
     //public TextMeshProUGUI gameOverText;
+    [SerializeField] private GameObject pauseMenu;
 
     private int score = 0;
     public float time = 30;
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour{
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         isGameOver = false;
         scoreText.text = score.ToString();
     }
@@ -50,7 +53,7 @@ public class GameManager : MonoBehaviour{
 
     private void PauseFunction()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isGamePaused)
             {
@@ -63,21 +66,25 @@ public class GameManager : MonoBehaviour{
         }
     }
 
-    private void Resume()
+    public void Resume()
     {
         isGamePaused = false;
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        Debug.Log("Resume");
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Pause()
     {
         isGamePaused = true;
+        pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        Debug.Log("Pause");
+        Cursor.lockState = CursorLockMode.None;
+
 
     }
-
+   
     /*
     private void GameOver(){
         if(isGameOver){
