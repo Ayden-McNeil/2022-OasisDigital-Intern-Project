@@ -8,8 +8,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour{
 
     [SerializeField]private TextMeshProUGUI scoreText;
+    [SerializeField]private TextMeshProUGUI endScoreText;
     [SerializeField]private TextMeshProUGUI timerText;
-    //[SerializeField]private GameObject endPanel; // uncomment once the restart screen is done and alther to liking 
+    [SerializeField]private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
 
     private int score = 0;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour{
             
         }else{
             isGameOver = true;
+            endScoreText.text = score.ToString();
         }
         
     }
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour{
    
     private void GameOver(){
         if(isGameOver){
-            //endPanel.gameObject.SetActive(true);// // uncomment once the restart screen is done and alther to liking 
+            endPanel.gameObject.SetActive(true);
         }
     }
 
