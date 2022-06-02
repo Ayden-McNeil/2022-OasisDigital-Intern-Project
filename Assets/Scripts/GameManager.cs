@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour{
     private void GameOver(){
         if(isGameOver){
             endPanel.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
         }
     }
 
