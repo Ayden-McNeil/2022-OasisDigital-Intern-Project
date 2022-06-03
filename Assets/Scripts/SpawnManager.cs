@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject target;
-    [SerializeField] private float delay;
     [SerializeField] private int gridHeight;
     [SerializeField] private int gridLength;
     [SerializeField] private int startingTargetNumber;
@@ -29,7 +28,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 position;
         do
         {
-            position = new Vector3(Random.Range(-gridLength / 2, gridLength / 2), Random.Range(-gridHeight / 2, gridHeight / 2), 0);
+            position = new Vector3(Random.Range(-gridLength / 2, gridLength / 2), Random.Range(-gridHeight / 2, gridHeight / 2), 0) + transform.position;
         }
         while (CheckIfPositionsIsInTargetFilledPositions(position));
         targetFilledPositions.Add(position);
