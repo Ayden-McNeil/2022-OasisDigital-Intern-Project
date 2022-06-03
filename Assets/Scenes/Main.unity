@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3174334167268999651, guid: a0dc6914bdfc1b84da44e168de3878c4, type: 3}
-  _camera: {fileID: 1073610570}
+  firstPersonCamera: {fileID: 1073610570}
   distance: 5
 --- !u!1 &1482094231
 GameObject:

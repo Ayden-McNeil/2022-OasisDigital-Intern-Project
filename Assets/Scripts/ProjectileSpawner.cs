@@ -23,7 +23,8 @@ public class ProjectileSpawner : MonoBehaviour
     }
 
     public void SpawnProjectile(){
-        Instantiate(projectile, firstPersonCamera.transform.position + firstPersonCamera.transform.forward * distance, firstPersonCamera.transform.rotation);
+        Vector3 spawnPosition = firstPersonCamera.transform.position + firstPersonCamera.transform.forward * distance;
+        Instantiate(projectile, spawnPosition, firstPersonCamera.transform.rotation);
     }
 
 

@@ -17,9 +17,21 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        spawnManagerScript.SpawnTargets();
-        spawnManagerScript.RemovePostionFromList(transform.position);
-        gameManagerScript.ScoreKeeper(pointValue);
-        Destroy(gameObject);
+        //spawnManagerScript.SpawnTargets();
+        //spawnManagerScript.RemovePostionFromList(transform.position);
+        //gameManagerScript.ScoreKeeper(pointValue);
+        //Destroy(gameObject);
     }
+    
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Projectile")
+        {
+            spawnManagerScript.SpawnTargets();
+            spawnManagerScript.RemovePostionFromList(transform.position);
+            gameManagerScript.ScoreKeeper(pointValue);
+        }
+    }
+
+
 }
