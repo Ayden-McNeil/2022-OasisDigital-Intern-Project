@@ -11,6 +11,5 @@ public class sceneVarPassover : MonoBehaviour
     {
         fov = FOVController.FOVVar;
         sens = mouseSensControl.sensVar;
-        Debug.Log(fov + "   " + sens); 
     }
 }
