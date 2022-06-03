@@ -9,6 +9,8 @@ public class Target : MonoBehaviour
     static private SpawnManager spawnManagerScript;
     static private GameManager gameManagerScript;
     static public int numberOfTargetsDestroyed;
+    public AudioSource targetFX;
+    public AudioClip hitSound;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class Target : MonoBehaviour
             spawnManagerScript.SpawnTargets();
             spawnManagerScript.RemovePostionFromList(transform.position);
             gameManagerScript.ScoreKeeper(pointValue);
+            targetFX.PlayOneShot(hitSound);
             numberOfTargetsDestroyed++;
             Destroy(gameObject);
         }
