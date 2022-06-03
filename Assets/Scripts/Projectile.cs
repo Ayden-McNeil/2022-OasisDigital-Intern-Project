@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour{
     // Start is called before the first frame update
 
     private Rigidbody rb;
-
+ 
 
     void Start()
     {
@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour{
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.forward, ForceMode.Impulse);
+        rb.AddForce(transform.forward * 50);
+
     }
+    
 }

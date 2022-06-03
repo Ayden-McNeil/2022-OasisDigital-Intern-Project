@@ -6,7 +6,6 @@ public class ProjectileSpawner : MonoBehaviour
 {
     public GameObject projectile;
     [SerializeField] private Camera firstPersonCamera;
-// Adjust how far in front of the camera the object should spawn
     [SerializeField] private float distance = 5;
     // Start is called before the first frame update
     void Start()
