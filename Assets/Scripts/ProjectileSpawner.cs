@@ -5,14 +5,12 @@ using UnityEngine;
 public class ProjectileSpawner : MonoBehaviour
 {
     public GameObject projectile;
-    [SerializeField] private Camera _camera;
+    [SerializeField] private Camera firstPersonCamera;
 // Adjust how far in front of the camera the object should spawn
     [SerializeField] private float distance = 5;
     // Start is called before the first frame update
     void Start()
     {
-        
-
 
 
     }
@@ -26,7 +24,7 @@ public class ProjectileSpawner : MonoBehaviour
     }
 
     public void SpawnProjectile(){
-        Instantiate(projectile, _camera.transform.position + _camera.transform.forward, _camera.transform.rotation);
+        Instantiate(projectile, firstPersonCamera.transform.position + firstPersonCamera.transform.forward * distance, firstPersonCamera.transform.rotation);
     }
 
 
