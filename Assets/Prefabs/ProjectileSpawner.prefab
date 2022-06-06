@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7c39af6635ae044a9fab4fd7e9d720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 3174334167268999651, guid: a0dc6914bdfc1b84da44e168de3878c4, type: 3}
+  projectile: {fileID: 1886212938165590, guid: 98b342dd18e69a346a6594879cc0c5ce, type: 3}
   firstPersonCamera: {fileID: 0}
   distance: 1
