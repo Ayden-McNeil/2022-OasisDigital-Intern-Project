@@ -31,6 +31,7 @@ public class Target : MonoBehaviour
             spawnManagerScript.SpawnTargets();
             spawnManagerScript.RemovePostionFromList(transform.position);
             gameManagerScript.ScoreKeeper(pointValue);
+            numberOfTargetsDestroyed++;
         }
     }
 

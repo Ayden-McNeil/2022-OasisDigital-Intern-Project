@@ -28,7 +28,10 @@ public class Projectile : MonoBehaviour{
     }
 
     private void OnCollisionEnter(Collision other) {
-        Destroy(other.gameObject);
+        if(other.gameObject.tag == "Target")
+        {
+            Destroy(other.gameObject);
+        }
         hit = true;
     }
 
