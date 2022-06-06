@@ -6,26 +6,27 @@ using TMPro;
 
 public class FOVController : MonoBehaviour
 {
-    public TMP_InputField FOVInput;
-    public Slider FOVSlider;
-    public static int FOVVar = 90;
 
-    void Awake()
-    {
-        FOVInput.onValueChanged.AddListener(delegate { changeValue(); });
-        FOVSlider.onValueChanged.AddListener(delegate { changeValueSlider(); });
-        FOVInput.text = FOVVar.ToString();
-    }
+  public TMP_InputField FOVInput;
+  public Slider FOVSlider;
+  public static int FOVVar = 90;
 
-    public void changeValue()
+  void Start()
     {
-        FOVSlider.value = float.Parse(FOVInput.text);
-        FOVVar = (int)FOVSlider.value;
-    }
+    FOVInput.onValueChanged.AddListener(delegate { changeValue(); });
+    FOVSlider.onValueChanged.AddListener(delegate { changeValueSlider(); });
+    FOVInput.text = "90";
+  }
 
-    public void changeValueSlider()
-    {
-        FOVInput.text = FOVSlider.value.ToString();
-        FOVVar = int.Parse(FOVInput.text);;
-    }
+  public void changeValue()
+  {
+    FOVSlider.value = float.Parse(FOVInput.text);
+    FOVVar = (int)FOVSlider.value;
+  }
+
+  public void changeValueSlider()
+  {
+    FOVInput.text = FOVSlider.value.ToString();
+    FOVVar = int.Parse(FOVInput.text);
+  }
 }
