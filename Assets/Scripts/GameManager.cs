@@ -7,32 +7,63 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour{
 
-    [SerializeField]private TextMeshProUGUI scoreText;
-    [SerializeField]private TextMeshProUGUI endScoreText;
-    [SerializeField]private TextMeshProUGUI timerText;
-    [SerializeField]private GameObject endPanel; 
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI endScoreText;
+    [SerializeField] private TextMeshProUGUI accrucaryText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private TextMeshProUGUI countDownText;
+
+    [SerializeField] private int countDownNumber = 3;
 
     private int score = 0;
-    public bool isGameOver;
-    [SerializeField]private float time = 30;
+    public bool isGameOver = false;
+    public bool isGameStarted = false;
     public bool isGamePaused = false;
+    [SerializeField]private float time = 30;
+    private int numberOfTimesMouseClicked = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
+        Target.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
         isGameOver = false;
         scoreText.text = score.ToString();
+        countDownText.text = countDownNumber.ToString();
+        StartCountDownTimer();
     }
 
-    // Update is called once per frame
-    void Update(){
-        Timer();
+    void StartCountDownTimer()
+    {
+        if (countDownNumber < 1)
+        {
+            isGameStarted = true;
+            countDownText.gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(CountDownTimer());
+        }
+    }
 
-        GameOver();
-        PauseFunction();
+    IEnumerator CountDownTimer()
+    {
+        yield return new WaitForSeconds(1);
+        countDownNumber--;
+        countDownText.text = countDownNumber.ToString();
+        StartCountDownTimer();
+    }
 
+    void Update()
+    {
+        if (isGameStarted)
+        {
+            Timer();
+            GameOver();
+            PauseFunction();
+            CountMouseClicks();
+        }
     }
 
     public void ScoreKeeper(int pointsAdded){
@@ -55,7 +86,7 @@ public class GameManager : MonoBehaviour{
 
     private void PauseFunction()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
         {
             if (isGamePaused)
             {
@@ -90,6 +121,25 @@ public class GameManager : MonoBehaviour{
     private void GameOver(){
         if(isGameOver){
             endPanel.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+    }
+
+    private void CountMouseClicks()
+    {
+        if (Input.GetMouseButtonDown(0) && !isGamePaused && !isGameOver)
+        {
+            numberOfTimesMouseClicked++;
+            Debug.Log(Target.numberOfTargetsDestroyed + " " + numberOfTimesMouseClicked);
+            if (numberOfTimesMouseClicked > 0)
+            {
+                accrucaryText.text = ((int)(Target.numberOfTargetsDestroyed / (float)numberOfTimesMouseClicked * 100)).ToString() + "%";
+            }
+            else
+            {
+                accrucaryText.text = "100%";
+            }
         }
     }
 
