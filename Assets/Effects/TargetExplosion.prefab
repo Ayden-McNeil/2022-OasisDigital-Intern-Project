@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6186266672370132848}
   - component: {fileID: 6186266672370132851}
   m_Layer: 0
-  m_Name: Pop
+  m_Name: TargetExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,7 +867,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 300
       minScalar: 10
       maxCurve:
         serializedVersion: 2

@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   pointValue: 500
+  explosionParticle: {fileID: 6186266672370132848, guid: 298840d4e3a0b6d4da0969466b28a956, type: 3}

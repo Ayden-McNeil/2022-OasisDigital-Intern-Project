@@ -34,7 +34,6 @@ public class Target : MonoBehaviour
             gameManagerScript.ScoreKeeper(pointValue);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             numberOfTargetsDestroyed++;
-
         }
     }
 
