@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!(gameManagerScript.isGameOver || gameManagerScript.isGamePaused))
+        if (!gameManagerScript.isGameOver && !gameManagerScript.isGamePaused && gameManagerScript.isGameStarted)
         {
             spawnManagerScript.SpawnTargets();
             spawnManagerScript.RemovePostionFromList(transform.position);

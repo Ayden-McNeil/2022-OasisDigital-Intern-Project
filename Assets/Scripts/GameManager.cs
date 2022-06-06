@@ -13,11 +13,15 @@ public class GameManager : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private TextMeshProUGUI countDownText;
+
+    [SerializeField] private int countDownNumber = 3;
 
     private int score = 0;
-    public bool isGameOver;
-    [SerializeField]private float time = 30;
+    public bool isGameOver = false;
+    public bool isGameStarted = false;
     public bool isGamePaused = false;
+    [SerializeField]private float time = 30;
     private int numberOfTimesMouseClicked = 0;
 
     void Start()
@@ -26,14 +30,40 @@ public class GameManager : MonoBehaviour{
         Time.timeScale = 1f;
         isGameOver = false;
         scoreText.text = score.ToString();
+        countDownText.text = countDownNumber.ToString();
+        StartCountDownTimer();
+    }
+
+    void StartCountDownTimer()
+    {
+        if (countDownNumber < 1)
+        {
+            isGameStarted = true;
+            countDownText.gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(CountDownTimer());
+        }
+    }
+
+    IEnumerator CountDownTimer()
+    {
+        yield return new WaitForSeconds(1);
+        countDownNumber--;
+        countDownText.text = countDownNumber.ToString();
+        StartCountDownTimer();
     }
 
     void Update()
     {
-        Timer();
-        GameOver();
-        PauseFunction();
-        CountMouseClicks();
+        if (isGameStarted)
+        {
+            Timer();
+            GameOver();
+            PauseFunction();
+            CountMouseClicks();
+        }
     }
 
     public void ScoreKeeper(int pointsAdded){
@@ -56,7 +86,7 @@ public class GameManager : MonoBehaviour{
 
     private void PauseFunction()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
         {
             if (isGamePaused)
             {
