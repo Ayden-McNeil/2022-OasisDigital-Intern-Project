@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forcePower: 2
+  lifeTime: 2
   hit: 0
 --- !u!54 &3174334167268999646
 Rigidbody:

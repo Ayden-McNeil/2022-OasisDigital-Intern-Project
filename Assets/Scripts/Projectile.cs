@@ -5,8 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour{
     // Start is called before the first frame update
 
-    private Rigidbody rb;
-    [SerializeField] private float forcePower = 50;
+    private Rigidbody rb;                            //GameComponent RigidBody
+    [SerializeField] private float forcePower = 50;  //Strength of the shot
+    [SerializeField] private float lifeTime = 1;     //How long the gameobject lasts
     public bool hit;
  
 
@@ -14,12 +15,13 @@ public class Projectile : MonoBehaviour{
     {
         hit = false;
         rb = GetComponent<Rigidbody>();
+        DestroyObjectDelayed();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if(!hit){
+        if(!hit)
+        {
             rb.AddForce(transform.forward * forcePower, ForceMode.Impulse);
         }
 
@@ -28,6 +30,12 @@ public class Projectile : MonoBehaviour{
     private void OnCollisionEnter(Collision other) {
         Destroy(other.gameObject);
         hit = true;
+    }
+
+    // Kills the game object in a certin amount seconds after loading the object
+    void DestroyObjectDelayed()
+    {
+        Destroy(gameObject, lifeTime);
     }
 
 }
