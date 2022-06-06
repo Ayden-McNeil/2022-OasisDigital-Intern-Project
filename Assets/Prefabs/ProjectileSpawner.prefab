@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 3174334167268999651, guid: a0dc6914bdfc1b84da44e168de3878c4, type: 3}
   firstPersonCamera: {fileID: 0}
-  distance: 5
+  distance: 1

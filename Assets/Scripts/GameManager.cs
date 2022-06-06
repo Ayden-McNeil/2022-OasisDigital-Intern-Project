@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour{
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI endScoreText;
-    [SerializeField] private TextMeshProUGUI accrucaryText;
+    [SerializeField] public TextMeshProUGUI accrucaryText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour{
     public bool isGameOver = false;
     public bool isGameStarted = false;
     public bool isGamePaused = false;
-    [SerializeField]private float time = 30;
-    private int numberOfTimesMouseClicked = 0;
+    [SerializeField] private float time = 30;
+    public int numberOfTimesMouseClicked = 0;
 
     void Start()
     {

@@ -6,25 +6,15 @@ public class Projectile : MonoBehaviour{
     // Start is called before the first frame update
 
     private Rigidbody rb;                            //GameComponent RigidBody
-    [SerializeField] private float forcePower = 50;  //Strength of the shot
+    [SerializeField] private float speed = 100;       //Strength of the shot
     [SerializeField] private float lifeTime = 1;     //How long the gameobject lasts
-    public bool hit;
- 
+
 
     void Start()
     {
-        hit = false;
         rb = GetComponent<Rigidbody>();
-        DestroyObjectDelayed();
-    }
-
-    void FixedUpdate()
-    {
-        if(!hit)
-        {
-            rb.AddForce(transform.forward * forcePower, ForceMode.Impulse);
-        }
-
+        rb.velocity = transform.forward * speed;
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter(Collision other) {
@@ -32,13 +22,5 @@ public class Projectile : MonoBehaviour{
         {
             Destroy(other.gameObject);
         }
-        hit = true;
     }
-
-    // Kills the game object in a certin amount seconds after loading the object
-    void DestroyObjectDelayed()
-    {
-        Destroy(gameObject, lifeTime);
-    }
-
 }

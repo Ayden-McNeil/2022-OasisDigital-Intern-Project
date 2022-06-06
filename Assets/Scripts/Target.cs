@@ -34,6 +34,8 @@ public class Target : MonoBehaviour
             gameManagerScript.ScoreKeeper(pointValue);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             numberOfTargetsDestroyed++;
+            gameManagerScript.accrucaryText.text = ((int)(Target.numberOfTargetsDestroyed / (float)gameManagerScript.numberOfTimesMouseClicked * 100)).ToString() + "%";
+
         }
     }
 
