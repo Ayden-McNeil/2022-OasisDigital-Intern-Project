@@ -6,6 +6,7 @@ public class Target : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
     [SerializeField] private int pointValue;
+    [SerializeField] private ParticleSystem explosionParticle;
     static private SpawnManager spawnManagerScript;
     static private GameManager gameManagerScript;
     static public int numberOfTargetsDestroyed;
@@ -31,7 +32,9 @@ public class Target : MonoBehaviour
             spawnManagerScript.SpawnTargets();
             spawnManagerScript.RemovePostionFromList(transform.position);
             gameManagerScript.ScoreKeeper(pointValue);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             numberOfTargetsDestroyed++;
+
         }
     }
 
