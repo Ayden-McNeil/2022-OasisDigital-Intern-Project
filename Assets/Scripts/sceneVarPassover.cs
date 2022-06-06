@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class sceneVarPassover : MonoBehaviour
 {
+    public static int pov;
     public static int fov;
     public static float sens;
 
@@ -11,5 +12,6 @@ public class sceneVarPassover : MonoBehaviour
     {
         fov = FOVController.FOVVar;
         sens = mouseSensControl.sensVar;
+        pov = POVSelector.pov;
     }
 }
