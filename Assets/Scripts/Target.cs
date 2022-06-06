@@ -8,6 +8,7 @@ public class Target : MonoBehaviour
     [SerializeField] private int pointValue;
     static private SpawnManager spawnManagerScript;
     static private GameManager gameManagerScript;
+    static public int numberOfTargetsDestroyed;
 
     private void Awake()
     {
