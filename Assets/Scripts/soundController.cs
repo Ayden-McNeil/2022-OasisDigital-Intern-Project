@@ -4,19 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class soundController : MonoBehaviour
+public class SoundController : MonoBehaviour
 {
-  public Slider volumeSlider;
+    [SerializeField] private Slider volumeSlider;
+    private AudioSource audioSource;
+    static public float volume;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = volume;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetVolume()
     {
-        
+        audioSource.volume = volumeSlider.value;
+        volume = volumeSlider.value;
     }
+
+
 }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI countDownText;
 
     [SerializeField] private int countDownNumber = 3;
+    [SerializeField] private AudioSource audioSource;
 
     private int score = 0;
     public bool isGameOver = false;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour{
 
     void Start()
     {
+        audioSource.volume = SceneVarPassover.volume;
         Target.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
         isGameOver = false;
