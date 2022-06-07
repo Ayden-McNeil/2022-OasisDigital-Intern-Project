@@ -21,10 +21,8 @@ public class POVSelector : MonoBehaviour
         Toggle toggle = toggleGroup.ActiveToggles().FirstOrDefault();
         if(toggle.name.Equals("FirstPerson")){
             pov = 1;
-            Debug.Log(toggle.name);
         }else{
             pov = 3;
-            Debug.Log(toggle.name);
         }
     }
 

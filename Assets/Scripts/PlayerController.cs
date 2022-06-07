@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     private float yRotation;
     [SerializeField] private float xSensitivity = 10f;
     [SerializeField] private float ySensitivity = 10f;
-    public Camera playerCamera;
+    public Camera playerCameraFP;           //First Person Camera
+    public Camera playerCameraTP;           //Third Person Camera
     public float sensVar;
     public int fovVar;
+    public int povVar;
     private int xInput = 0;
     private int lastXInput = 0;
     private int zInput = 0;
@@ -22,11 +24,20 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        
         body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         sensVar = sceneVarPassover.sens;
         fovVar = sceneVarPassover.fov;
-        playerCamera.fieldOfView = fovVar;
+        povVar = sceneVarPassover.pov;
+
+        if(povVar == 1){
+            playerCameraFP.fieldOfView = fovVar;
+            playerCameraFP.gameObject.SetActive(true);
+        }else{
+            playerCameraTP.fieldOfView = fovVar;
+            playerCameraTP.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
