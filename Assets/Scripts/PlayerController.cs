@@ -31,12 +31,12 @@ public class PlayerController : MonoBehaviour
         fovVar = sceneVarPassover.fov;
         povVar = sceneVarPassover.pov;
 
-        if(povVar == 1){
-            playerCameraFP.fieldOfView = fovVar;
-            playerCameraFP.gameObject.SetActive(true);
-        }else{
+        if(povVar == 3){
             playerCameraTP.fieldOfView = fovVar;
             playerCameraTP.gameObject.SetActive(true);
+        }else{
+            playerCameraFP.fieldOfView = fovVar;
+            playerCameraFP.gameObject.SetActive(true);
         }
     }
 
