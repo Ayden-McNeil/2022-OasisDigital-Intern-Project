@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         sensVar = sceneVarPassover.sens;
         fovVar = sceneVarPassover.fov;
         povVar = sceneVarPassover.pov;
-
         if(povVar == 3){
             playerCameraTP.fieldOfView = fovVar;
             playerCameraTP.gameObject.SetActive(true);
