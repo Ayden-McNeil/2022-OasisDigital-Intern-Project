@@ -1391,7 +1391,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1198373356}
-        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
+        m_TargetAssemblyTypeName: soundController, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 1
         m_Arguments:

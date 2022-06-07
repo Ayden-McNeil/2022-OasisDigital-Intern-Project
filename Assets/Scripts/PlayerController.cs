@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-        sensVar = SceneVarPassover.sens;
-        fovVar = SceneVarPassover.fov;
+        sensVar = sceneVarPassover.sens;
+        fovVar = sceneVarPassover.fov;
         playerCamera.fieldOfView = fovVar;
     }
 

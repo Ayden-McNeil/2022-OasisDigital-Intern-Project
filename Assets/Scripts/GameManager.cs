@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour{
 
     void Start()
     {
-        audioSource.volume = SceneVarPassover.volume;
+        audioSource.volume = sceneVarPassover.volume;
         Target.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
         isGameOver = false;

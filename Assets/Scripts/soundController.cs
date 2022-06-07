@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SoundController : MonoBehaviour
+public class soundController : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
     private AudioSource audioSource;

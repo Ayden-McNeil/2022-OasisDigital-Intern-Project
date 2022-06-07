@@ -10,6 +10,6 @@ public class SoundSlider : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        slider.value = SceneVarPassover.volume;
+        slider.value = sceneVarPassover.volume;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneVarPassover : MonoBehaviour
+public class sceneVarPassover : MonoBehaviour
 {
     public static int fov;
     public static float sens;
@@ -12,6 +12,6 @@ public class SceneVarPassover : MonoBehaviour
     {
         fov = FOVController.FOVVar;
         sens = mouseSensControl.sensVar;
-        volume = SoundController.volume;
+        volume = soundController.volume;
     }
 }
