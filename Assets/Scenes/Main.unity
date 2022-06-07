@@ -652,10 +652,6 @@ PrefabInstance:
     - target: {fileID: 7394804823521819154, guid: ec5102388c2077f4d879e7cb77331e5c, type: 3}
       propertyPath: firstPersonCamera
       value: 
-      objectReference: {fileID: 644259019}
-    - target: {fileID: 7394804823521819154, guid: ec5102388c2077f4d879e7cb77331e5c, type: 3}
-      propertyPath: thirdPersonCamera
-      value: 
       objectReference: {fileID: 7228752935386275400}
     - target: {fileID: 7394804823521819155, guid: ec5102388c2077f4d879e7cb77331e5c, type: 3}
       propertyPath: m_RootOrder
