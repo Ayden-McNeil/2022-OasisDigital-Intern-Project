@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8361195146713364655}
   - component: {fileID: -930332046806935830}
   - component: {fileID: -2149952668011438863}
+  - component: {fileID: 5007897343603685672}
   m_Layer: 0
   m_Name: Ball_8Ball
   m_TagString: Target
@@ -118,3 +119,24 @@ MonoBehaviour:
   lifeTime: 1
   pointValue: 500
   explosionParticle: {fileID: 6186266672370132848, guid: 298840d4e3a0b6d4da0969466b28a956, type: 3}
+--- !u!223 &5007897343603685672
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385695026869177935}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
