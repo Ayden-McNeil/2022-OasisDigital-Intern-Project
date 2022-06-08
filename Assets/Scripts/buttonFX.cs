@@ -8,12 +8,12 @@ public class buttonFX : MonoBehaviour
   public AudioClip buttonHover;
   public AudioClip buttonPressed;
 
-  public void hoverSound()
+  public void PlayHover()
   {
     myFX.PlayOneShot(buttonHover);
   }
 
-  public void pressSound()
+  public void PlayDown()
   {
     myFX.PlayOneShot(buttonPressed);
   }
