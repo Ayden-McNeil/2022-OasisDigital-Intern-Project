@@ -7,7 +7,7 @@ public class sceneVarPassover : MonoBehaviour
     public static int pov;
     public static int fov;
     public static float sens;
-    public static float volume = 0.5f;
+    public static float volume = 0f;
 
     public void getValues()
     {

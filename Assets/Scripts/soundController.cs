@@ -7,12 +7,13 @@ using TMPro;
 public class soundController : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     static public float volume;
 
      void Awake()
     {
-        volumeSlider.value = sceneVarPassover.volume;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = volume;
     }
 
     public void SetVolume()
