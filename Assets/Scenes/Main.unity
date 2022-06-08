@@ -1316,6 +1316,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1127125027}
     - target: {fileID: 5488468019725028287, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
+      propertyPath: audiosource
+      value: 
+      objectReference: {fileID: 702179463}
+    - target: {fileID: 5488468019725028287, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
       propertyPath: endScoreText
       value: 
       objectReference: {fileID: 415874012}
