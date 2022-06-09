@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject highScoreMenu;
+    [SerializeField] private GameObject leaderboardManager;
+    private LeaderboardController leaderboardController;
     [SerializeField] private TextMeshProUGUI countDownText;
     [SerializeField] private AudioSource audiosource;
 
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour{
     void Start()
     {
         audiosource.volume = sceneVarPassover.volume;
+        leaderboardController = leaderboardManager.GetComponent<LeaderboardController>();
         Target.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
         isGameOver = false;
@@ -68,21 +72,21 @@ public class GameManager : MonoBehaviour{
         }
     }
 
-    public void ScoreKeeper(int pointsAdded){
+    public void ScoreKeeper(int pointsAdded) {
         score += pointsAdded;
         scoreText.text = score.ToString();
     }
 
-    private void Timer(){
+    private void Timer() {
         if (time > 0){
             time -= Time.deltaTime;
             timerText.text = Mathf.RoundToInt(time).ToString();  //rounds to the nearest integer
             
-        }else{
+        } else {
+            if (!isGameOver) leaderboardController.SubmitScore(score);
             isGameOver = true;
             endScoreText.text = score.ToString();
-        }
-        
+        } 
     }
 
 
@@ -107,7 +111,6 @@ public class GameManager : MonoBehaviour{
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     private void Pause()
@@ -116,12 +119,10 @@ public class GameManager : MonoBehaviour{
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
-
-
     }
    
-    private void GameOver(){
-        if(isGameOver){
+    private void GameOver() {
+        if (isGameOver) {
             endPanel.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
@@ -144,10 +145,5 @@ public class GameManager : MonoBehaviour{
             }
         }
     }
-
-
-
-
-
 
 }

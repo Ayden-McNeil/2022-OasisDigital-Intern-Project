@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.lootlocker.lootlockersdk": {
+      "version": "https://github.com/LootLocker/unity-sdk.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
+      "hash": "f5f4bce55bc2b9429d38f7610ee40309d7f9e90a"
+    },
     "com.unity.collab-proxy": {
       "version": "1.15.16",
       "depth": 0,
@@ -64,7 +73,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.0.2",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -154,6 +163,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "de.thirteenpixels.gitmerge": {
+      "version": "https://github.com/FlaShG/GitMerge-for-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8f7b835491bf3257d39b9ea3ef72ffdfcc8df980"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
