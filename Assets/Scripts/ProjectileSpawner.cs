@@ -17,9 +17,9 @@ public class ProjectileSpawner : MonoBehaviour
     {
         gameManagerScript = FindObjectOfType<GameManager>();
         cameraVar = sceneVarPassover.pov;
-        if(cameraVar == 3){
+        if (cameraVar == 3){
             currentCamera = thirdPersonCamera;
-        }else{
+        } else {
             currentCamera = firstPersonCamera;
         }
     }
