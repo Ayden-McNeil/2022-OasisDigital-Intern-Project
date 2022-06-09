@@ -597,6 +597,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1185499746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185499748}
+  - component: {fileID: 1185499747}
+  m_Layer: 0
+  m_Name: LeaderboardController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1185499747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185499746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64dc10df59ee8ab448990c6255b2ce2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 3688
+--- !u!4 &1185499748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185499746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 477.012, y: 299.62582, z: -55.675415}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296579875
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +980,7 @@ GameObject:
   - component: {fileID: 1864957272}
   - component: {fileID: 1864957271}
   - component: {fileID: 1864957270}
+  - component: {fileID: 1864957273}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -991,6 +1037,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1864957273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864957269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b9413db26a2364db2d3a6efa91ee34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2081207655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1332,9 +1390,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1296579877}
     - target: {fileID: 5488468019725028287, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
+      propertyPath: highScoreMenu
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5488468019725028287, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
       propertyPath: countDownNumber
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5488468019725028287, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
+      propertyPath: leaderboardManager
+      value: 
+      objectReference: {fileID: 1185499746}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61f70a3ba144f6b4dbb93b7aa96f5984, type: 3}
 --- !u!1001 &6256381281418060615
