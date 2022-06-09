@@ -115,15 +115,7 @@ public class PlayerController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90, 90);
 
         transform.localRotation = Quaternion.Euler(0, yRotation, 0);
-        if (isFirstPerson)
-        {
-            mainCamera.gameObject.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
-        }
-        if (isThirdPerson)
-        {
-            focalTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-
-        }
+        focalTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
     }
 
     void DoRayCast()
