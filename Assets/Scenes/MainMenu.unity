@@ -3584,6 +3584,14 @@ PrefabInstance:
       propertyPath: third
       value: 
       objectReference: {fileID: 2054912284}
+    - target: {fileID: 8737803480925878918, guid: 03f30646fe6fc2e4c9c7da9379c04a6b, type: 3}
+      propertyPath: firstToggle
+      value: 
+      objectReference: {fileID: 1545925068}
+    - target: {fileID: 8737803480925878918, guid: 03f30646fe6fc2e4c9c7da9379c04a6b, type: 3}
+      propertyPath: thirdToggle
+      value: 
+      objectReference: {fileID: 2054912284}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f30646fe6fc2e4c9c7da9379c04a6b, type: 3}
 --- !u!1001 &8793587044079220824
