@@ -17,6 +17,7 @@ public class OnlinePlayerController : NetworkBehaviour
     private int zInput = 0;
     private int lastZInput = 0;
     public float speed = 10.0f;
+    private Vector3 moveVector;
 
     public float sensVar;
     public int fovVar;
@@ -25,20 +26,31 @@ public class OnlinePlayerController : NetworkBehaviour
     private Camera mainCamera;
     public Camera playerCameraFP;           //First Person Camera
     public Camera playerCameraTP;           //Third Person Camera
-    private bool isFirstPerson = false;
-    private bool isThirdPerson = false;
+    static private bool doesNotHaveCamera = true;
+
+    private OnlineGameManager gameManagerScript;
 
     [SerializeField] private GameObject focalPoint;
     [SerializeField] private GameObject pointer;
+    [SerializeField] private OnlineProjectileSpawner projectileSpawner;
+    [SerializeField] private GameObject frontOfTheGun;
+    [SerializeField] private GameObject projectile;
     [SerializeField] private LayerMask layerMask;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
-        if (isLocalPlayer)
+        gameManagerScript = FindObjectOfType<OnlineGameManager>();
+
+        if (isLocalPlayer && doesNotHaveCamera)
         {
             GetPassoverValues();
+        }
+        else
+        {
+            playerCameraFP.gameObject.SetActive(false);
+            playerCameraTP.gameObject.SetActive(false);
         }
     }
 
@@ -47,9 +59,44 @@ public class OnlinePlayerController : NetworkBehaviour
         if (isLocalPlayer)
         {
             DoRayCast();
-            RotateCamera();
-            Move();
+            if (!gameManagerScript.isGamePaused)
+            {
+                RotateCamera();
+                CheckShoot();
+                Move();
+            }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isLocalPlayer)
+        {
+            body.velocity = moveVector;
+        }
+    }
+
+    void CheckShoot()
+    {
+        if (Input.GetMouseButtonDown(0) && !gameManagerScript.isGameOver && !gameManagerScript.isGamePaused)
+        {
+            Vector3 spawnPosition = frontOfTheGun.transform.position;
+            Vector3 direction = (GetRayCast() - frontOfTheGun.transform.position).normalized;
+            SpawnProjectileCmd(spawnPosition, direction);
+        }
+    }
+
+    [Command]
+    void SpawnProjectileCmd(Vector3 spawnPosition, Vector3 direction)
+    {
+        SpawnProjectileRpc(spawnPosition, direction);
+    }
+
+    [ClientRpc]
+    void SpawnProjectileRpc(Vector3 spawnPosition, Vector3 direction)
+    {
+        GameObject spawnedProjectile = Instantiate(projectile, spawnPosition, Quaternion.identity);
+        spawnedProjectile.GetComponent<Rigidbody>().velocity = direction * 50;
     }
 
     void Move()
@@ -85,9 +132,8 @@ public class OnlinePlayerController : NetworkBehaviour
             zInput = 1;
             lastZInput = zInput;
         }
-        Vector3 moveVector = (transform.forward * zInput * Time.deltaTime + transform.right * xInput * Time.deltaTime) * speed;
+        moveVector = (transform.forward * zInput + transform.right * xInput) * speed;
         moveVector.y = body.velocity.y;
-        body.velocity = moveVector;
     }
 
     void RotateCamera()
@@ -114,6 +160,17 @@ public class OnlinePlayerController : NetworkBehaviour
         }
     }
 
+    Vector3 GetRayCast()
+    {
+        Vector2 centerScreenPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = mainCamera.ScreenPointToRay(centerScreenPosition);
+        if (Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, layerMask))
+        {
+           return rayCastHit.point;
+        }
+        return new Vector3(0,0,0);
+    }
+
     void GetPassoverValues()
     {
         sensVar = sceneVarPassover.sens;
@@ -123,15 +180,13 @@ public class OnlinePlayerController : NetworkBehaviour
         if (povVar == 3)
         {
             mainCamera = playerCameraTP;
-            isThirdPerson = true;
         }
         else
         {
             mainCamera = playerCameraFP;
-            isFirstPerson = true;
-
         }
         mainCamera.fieldOfView = fovVar;
         mainCamera.gameObject.SetActive(true);
+        doesNotHaveCamera = true;
     }
 }
