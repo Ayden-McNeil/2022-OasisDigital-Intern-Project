@@ -7,12 +7,18 @@ public class NetworkManagerScript : MonoBehaviour
 {
     NetworkManager manager;
 
-    private void Start()
+    private void Awake()
     {
         manager = GetComponent<NetworkManager>();
     }
+
     public void ConnectPlayer()
     {
         manager.StartClient();
+    }
+
+    public void DisconnectPlayer()
+    {
+        manager.StopClient();
     }
 }

@@ -23,13 +23,13 @@ public class OfflinePlayerController : MonoBehaviour
     private int zInput = 0;
     private int lastZInput = 0;
     public float speed = 10.0f;
-
-    private bool isFirstPerson = false;
-    private bool isThirdPerson = false;
+    private Vector3 moveVector;
 
     private Transform focalTransform;
 
     [SerializeField] private GameObject pointer;
+    [SerializeField] private OfflineGameManager gameManagerScript;
+    [SerializeField] private OfflineProjectileSpawner projectileSpawner;
     [SerializeField] private LayerMask layerMask;
 
     private void Start()
@@ -38,25 +38,7 @@ public class OfflinePlayerController : MonoBehaviour
         focalTransform = GameObject.Find("FocalPoint").GetComponent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
 
-        sensVar = sceneVarPassover.sens;
-        fovVar = sceneVarPassover.fov;
-        povVar = sceneVarPassover.pov;
-
-        if(povVar == 3)
-        {
-            mainCamera = playerCameraTP;
-            isThirdPerson = true;
-        }
-        else
-        {
-            mainCamera = playerCameraFP;
-            isFirstPerson = true;
-
-        }
-        mainCamera.fieldOfView = fovVar;
-        Debug.Log("camera turned on");
-        mainCamera.gameObject.SetActive(true);
-        
+       GetPassoverValues();
     }
 
     private void Update()
@@ -64,7 +46,21 @@ public class OfflinePlayerController : MonoBehaviour
        DoRayCast();
        RotateCamera();
        Move();
+       CheckShoot();
         
+    }
+
+    private void FixedUpdate()
+    {
+        body.velocity = moveVector;
+    }
+
+    private void CheckShoot()
+    {
+        if(Input.GetMouseButtonDown(0) && !gameManagerScript.isGameOver && !gameManagerScript.isGamePaused && gameManagerScript.isGameStarted)
+        {
+            projectileSpawner.SpawnProjectile();
+        }
     }
 
     void Move()
@@ -100,9 +96,8 @@ public class OfflinePlayerController : MonoBehaviour
             zInput = 1;
             lastZInput = zInput;
         }
-        Vector3 moveVector = (transform.forward * zInput * Time.deltaTime + transform.right * xInput * Time.deltaTime) * speed;
+        moveVector = (transform.forward * zInput + transform.right * xInput) * speed;
         moveVector.y = body.velocity.y;
-        body.velocity = moveVector;
     }
 
     void RotateCamera()
@@ -127,5 +122,23 @@ public class OfflinePlayerController : MonoBehaviour
         {
             pointer.transform.position = rayCastHit.point;
         }
+    }
+
+    void GetPassoverValues()
+    {
+        sensVar = sceneVarPassover.sens;
+        fovVar = sceneVarPassover.fov;
+        povVar = sceneVarPassover.pov;
+
+        if (povVar == 3)
+        {
+            mainCamera = playerCameraTP;
+        }
+        else
+        {
+            mainCamera = playerCameraFP;
+        }
+        mainCamera.fieldOfView = fovVar;
+        mainCamera.gameObject.SetActive(true);
     }
 }

@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour{
-    // Start is called before the first frame update
 
-    private Rigidbody rb;                            //GameComponent RigidBody
-    [SerializeField] private float speed = 100;      //Strength of the shot
-    [SerializeField] private float lifeTime = 1;     //How long the gameobject lasts
+    [SerializeField] private float lifeTime = 5;     //How long the gameobject lasts
      
     void Start()
     {
-        rb = GetComponent<Rigidbody>();             
         gameObject.GetComponent<Renderer>().material.color = RandomColor();
-        rb.velocity = transform.forward * speed;
         Destroy(gameObject, lifeTime);
     }
 
