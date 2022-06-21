@@ -5,10 +5,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour{
 
     [SerializeField] private float lifeTime = 5;     //How long the gameobject lasts
-     
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip shootSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         gameObject.GetComponent<Renderer>().material.color = RandomColor();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(shootSound);
         Destroy(gameObject, lifeTime);
     }
 
@@ -16,6 +21,7 @@ public class Projectile : MonoBehaviour{
         if(other.gameObject.tag == "Target")
         {
             Destroy(other.gameObject);
+            audioSource.PlayOneShot(hitSound);
         }
     }
 
