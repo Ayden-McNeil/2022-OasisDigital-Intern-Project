@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 722286693667255953}
-  - component: {fileID: 722286693667255954}
+  - component: {fileID: 4055024732122296516}
   - component: {fileID: 722286693667255955}
   - component: {fileID: 7166022968936618521}
   m_Layer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &722286693667255954
+--- !u!114 &4055024732122296516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   autoStartServerBuild: 1
   serverTickRate: 30
   offlineScene: 
-  onlineScene: 
+  onlineScene: Assets/Scenes/OnlineScene.unity
   transport: {fileID: 722286693667255955}
   networkAddress: us-east.cloud.playflow.app
   maxConnections: 100
@@ -60,7 +60,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 7508958596466095598, guid: b7cc4e43324d9be4a8e0e70803a6c297, type: 3}
+  - {fileID: 3915761249267800270, guid: 251e9d851c9f83343ace99eee5949a34, type: 3}
 --- !u!114 &722286693667255955
 MonoBehaviour:
   m_ObjectHideFlags: 0

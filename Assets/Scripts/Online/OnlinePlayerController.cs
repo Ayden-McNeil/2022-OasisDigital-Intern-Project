@@ -29,19 +29,21 @@ public class OnlinePlayerController : NetworkBehaviour
     static private bool doesNotHaveCamera = true;
 
     private OnlineGameManager gameManagerScript;
+    private OnlineTargetSpawner targetSpawnerScript;
 
     [SerializeField] private GameObject focalPoint;
     [SerializeField] private GameObject pointer;
-    [SerializeField] private OnlineProjectileSpawner projectileSpawner;
     [SerializeField] private GameObject frontOfTheGun;
     [SerializeField] private GameObject projectile;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private GameObject targetSpawner;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
+
 
         if (isLocalPlayer && doesNotHaveCamera)
         {

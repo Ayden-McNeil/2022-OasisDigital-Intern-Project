@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4214254299328086079}
-  - component: {fileID: 282483177918224124}
+  - component: {fileID: 3682533487268250104}
   m_Layer: 0
-  m_Name: Spawn Manager
+  m_Name: OfflineTargetSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &282483177918224124
+--- !u!114 &3682533487268250104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3915761249267800270, guid: 89d626121d0e171448c6920ef583eed2, type: 3}
-  delay: 0
-  gridHeight: 6
-  gridLength: 6
+  gridHeight: 5
+  gridLength: 8
   startingTargetNumber: 5

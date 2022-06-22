@@ -832,6 +832,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2081207658, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
+      propertyPath: sceneId
+      value: 1294610679
+      objectReference: {fileID: 0}
     - target: {fileID: 282483177918224124, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
       propertyPath: target
       value: 
@@ -896,7 +900,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2081207657, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
+    - {fileID: 2081207658, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c61eb80db0d9bd342a7761baec22070b, type: 3}
 --- !u!1 &2121349748 stripped
 GameObject:
