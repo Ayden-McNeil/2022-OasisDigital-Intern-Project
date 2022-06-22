@@ -62,7 +62,7 @@ public class Leaderboard : MonoBehaviour
         LootLockerSDKManager.LookupPlayerNamesByPlayerIds(new ulong[] { ulong.Parse(id) }, response =>
         {
             string name = "";
-            if (response.success) name = response.players[0].name;
+            if (response.success && response.players.Length != 0) name = response.players[0].name;
             printed = (name != "") ? name : id;
             names[rank-1] = printed;
         });
@@ -71,7 +71,7 @@ public class Leaderboard : MonoBehaviour
     IEnumerator FetchTopHighscoresRoutine() {
         ResetText();
         bool done = false;
-        LootLockerSDKManager.GetScoreListMain(ID, 10, 0, (response) => {
+        LootLockerSDKManager.GetScoreList(ID, 10, 0, (response) => {
             if (response.success) {
                 string tempPlayerNames = "Names\n";
                 string tempPlayerScores = "Scores\n";
@@ -87,8 +87,8 @@ public class Leaderboard : MonoBehaviour
                     scores[member.rank - 1] = member.score.ToString();
                 }
                 done = true;
-                playerNames.text = tempPlayerNames;
-                playerScores.text = tempPlayerScores;
+                // playerNames.text = tempPlayerNames;
+                // playerScores.text = tempPlayerScores;
             }
             else {
                 Debug.Log(response.text);
