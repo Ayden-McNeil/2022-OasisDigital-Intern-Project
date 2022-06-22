@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 9b603d9c377c34240abfd5e59f031216, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6741cf3f6216b7949b29439a31f1c1f4, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: b4e826ac64849a84b8b77fecc68b4f30, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1250,6 +1250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
+    - target: {fileID: 9109722460448046532, guid: 7ef044aa19b42944492e068e9791ee33, type: 3}
+      propertyPath: m_Name
+      value: Floor (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ef044aa19b42944492e068e9791ee33, type: 3}
 --- !u!1001 &7205370079531261749
@@ -1508,6 +1512,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 855392931
       objectReference: {fileID: 0}
+    - target: {fileID: 614029261621667648, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8015dd35ee65e46c3917c60951b17cda, type: 2}
     - target: {fileID: 1513361348582712859, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_RootOrder
       value: 8
