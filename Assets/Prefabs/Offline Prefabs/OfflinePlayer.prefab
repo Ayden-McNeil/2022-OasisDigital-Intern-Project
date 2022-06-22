@@ -425,6 +425,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7229588217127862841}
     m_Modifications:
+    - target: {fileID: 196928956331771337, guid: 35ecc07d798c1d24f8859419c83b0aea, type: 3}
+      propertyPath: recoil.x
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3411705012797545694, guid: 35ecc07d798c1d24f8859419c83b0aea, type: 3}
       propertyPath: pointer
       value: 
