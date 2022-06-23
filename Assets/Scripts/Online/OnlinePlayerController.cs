@@ -72,6 +72,7 @@ public class OnlinePlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        body.angularVelocity = new Vector3(0,0,0);
         if (isLocalPlayer)
         {
             body.velocity = moveVector;
@@ -134,7 +135,7 @@ public class OnlinePlayerController : NetworkBehaviour
             zInput = 1;
             lastZInput = zInput;
         }
-        moveVector = (transform.forward * zInput + transform.right * xInput) * speed;
+        moveVector = (transform.forward * zInput + transform.right * xInput).normalized * speed;
         moveVector.y = body.velocity.y;
     }
 
