@@ -10,7 +10,6 @@ public class OnlineGameManager : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI endScoreText;
     [SerializeField] public TextMeshProUGUI accrucaryText;
-    //[SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private AudioSource audiosource;
@@ -19,6 +18,7 @@ public class OnlineGameManager : MonoBehaviour{
     public bool isGameOver = false;
     public bool isGamePaused = false;
     public int numberOfTimesMouseClicked = 0;
+    private int numberOfTargetsDestroyed = 0;
 
     void Start()
     {
@@ -31,22 +31,17 @@ public class OnlineGameManager : MonoBehaviour{
 
     void Update()
     {
-        Timer();
-        GameOver();
         PauseFunction();
         CountMouseClicks();
     }
 
-    public void ScoreKeeper(int pointsAdded){
-        score += pointsAdded;
-        scoreText.text = score.ToString();
-    }
-
-    private void Timer()
+    public void DestroyedTarget()
     {
-        
+        numberOfTargetsDestroyed++;
+        score++;
+        scoreText.text = score.ToString();
+        accrucaryText.text = ((int)(numberOfTargetsDestroyed / (float)numberOfTimesMouseClicked * 100)).ToString() + "%";
     }
-
 
     private void PauseFunction()
     {
@@ -79,10 +74,6 @@ public class OnlineGameManager : MonoBehaviour{
 
 
     }
-   
-    private void GameOver(){
-       
-    }
 
     private void CountMouseClicks()
     {
@@ -91,7 +82,7 @@ public class OnlineGameManager : MonoBehaviour{
             numberOfTimesMouseClicked++;
             if (numberOfTimesMouseClicked > 0)
             {
-                accrucaryText.text = ((int)(OfflineTarget.numberOfTargetsDestroyed / (float)numberOfTimesMouseClicked * 100)).ToString() + "%";
+                accrucaryText.text = ((int)(numberOfTargetsDestroyed / (float)numberOfTimesMouseClicked * 100)).ToString() + "%";
             }
             else
             {
