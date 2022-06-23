@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class OfflineTargetSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private int gridHeight;

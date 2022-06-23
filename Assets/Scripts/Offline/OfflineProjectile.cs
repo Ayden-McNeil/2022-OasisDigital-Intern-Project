@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour{
+public class OfflineProjectile : MonoBehaviour{
 
     [SerializeField] private float lifeTime = 5;     //How long the gameobject lasts
     [SerializeField] private AudioClip hitSound;

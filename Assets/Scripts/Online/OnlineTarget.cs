@@ -1,27 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class OnlineTarget : MonoBehaviour
+public class OnlineTarget : NetworkBehaviour
 {
     [SerializeField] private int pointValue;
     [SerializeField] private ParticleSystem explosionParticle;
-    static private SpawnManager spawnManagerScript;
+    static private OnlineTargetSpawner onlineTargetSpawner;
     static private OnlineGameManager gameManagerScript;
     static public int numberOfTargetsDestroyed;
+    static private int IDCounter = 0;
+    public int ID;
 
     private void Awake()
     {
-        spawnManagerScript = FindObjectOfType<SpawnManager>();
+        onlineTargetSpawner = FindObjectOfType<OnlineTargetSpawner>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
+        ID = IDCounter++;
     }
     
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Projectile")
         {
-            spawnManagerScript.SpawnTargets();
-            spawnManagerScript.RemovePostionFromList(transform.position);
+            onlineTargetSpawner.ChangePosition(gameObject);
             gameManagerScript.ScoreKeeper(pointValue);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             numberOfTargetsDestroyed++;

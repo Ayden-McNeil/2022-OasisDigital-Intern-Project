@@ -7,13 +7,13 @@ public class OfflineTarget : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private int pointValue;
     [SerializeField] private ParticleSystem explosionParticle;
-    static private SpawnManager spawnManagerScript;
+    static private OfflineTargetSpawner spawnManagerScript;
     static private OfflineGameManager gameManagerScript;
     static public int numberOfTargetsDestroyed;
 
     private void Awake()
     {
-        spawnManagerScript = FindObjectOfType<SpawnManager>();
+        spawnManagerScript = FindObjectOfType<OfflineTargetSpawner>();
         gameManagerScript = FindObjectOfType<OfflineGameManager>();
     }
 
