@@ -27,6 +27,7 @@ public class OfflinePlayerController : MonoBehaviour
 
     private Transform focalTransform;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private GameObject pointer;
     [SerializeField] private OfflineGameManager gameManagerScript;
     [SerializeField] private OfflineProjectileSpawner projectileSpawner;
@@ -52,7 +53,18 @@ public class OfflinePlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(moveVector);
+        if (moveVector.magnitude > 0)
+        {
+            animator.SetFloat("Speed_f", 0.6f);
+        }
+        else
+        {
+            animator.SetFloat("Speed_f", 0);
+        }
+        moveVector.y = body.velocity.y;
         body.velocity = moveVector;
+
     }
 
     private void CheckShoot()
@@ -96,8 +108,7 @@ public class OfflinePlayerController : MonoBehaviour
             zInput = 1;
             lastZInput = zInput;
         }
-        moveVector = (transform.forward * zInput + transform.right * xInput) * speed;
-        moveVector.y = body.velocity.y;
+        moveVector = (transform.forward * zInput + transform.right * xInput).normalized * speed;
     }
 
     void RotateCamera()

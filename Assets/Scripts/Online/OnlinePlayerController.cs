@@ -31,6 +31,7 @@ public class OnlinePlayerController : NetworkBehaviour
     private OnlineGameManager gameManagerScript;
     private OnlineTargetSpawner targetSpawnerScript;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private GameObject focalPoint;
     [SerializeField] private GameObject pointer;
     [SerializeField] private GameObject frontOfTheGun;
@@ -72,9 +73,14 @@ public class OnlinePlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        
         body.angularVelocity = new Vector3(0,0,0);
         if (isLocalPlayer)
         {
+            if(moveVector.magnitude > 0)
+            {
+                animator.SetFloat("Speed_f", 0.6f);
+            }
             body.velocity = moveVector;
         }
     }
