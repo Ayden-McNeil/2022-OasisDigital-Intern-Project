@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
 
 public class OfflineGameManager : MonoBehaviour{
 
@@ -26,8 +29,15 @@ public class OfflineGameManager : MonoBehaviour{
     [SerializeField] private float time = 30;
     public int numberOfTimesMouseClicked = 0;
 
+    public FirebaseAuth auth;    
+    public FirebaseUser User;
+    public DatabaseReference DBreference;
+
     void Start()
     {
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        User = auth.CurrentUser;
         audiosource.volume = sceneVarPassover.volume;
         OfflineTarget.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
@@ -86,9 +96,23 @@ public class OfflineGameManager : MonoBehaviour{
             
         }else{
             isGameOver = true;
-            endScoreText.text = score.ToString();
+           StartCoroutine(updateHighscore(score));
         }
         
+    }
+
+      private IEnumerator updateHighscore(int _highscore)
+    {
+        
+        //Set the currently logged in user xp
+        var DBTask = FirebaseManager.DBreference.Child("users").Child(FirebaseManager.User.UserId).Child("Highscore").SetValueAsync(_highscore);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
     }
 
 

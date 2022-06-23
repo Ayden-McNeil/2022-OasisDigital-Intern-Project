@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Target
+  - firebase
   layers:
   - Default
   - TransparentFX

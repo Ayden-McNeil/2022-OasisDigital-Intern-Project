@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "871002516555",
+    "firebase_url": "https://fir-leaderboards-default-rtdb.firebaseio.com",
+    "project_id": "fir-leaderboards",
+    "storage_bucket": "fir-leaderboards.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871002516555:android:a769fbb3843a35c3f771ce",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.AimLabClone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871002516555-3mi92vc9hhuitr6p27bttaj8gjirt6ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFzN8_U96LtqyEWOhD9Nw5fM4BfrLcS4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871002516555-3mi92vc9hhuitr6p27bttaj8gjirt6ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
