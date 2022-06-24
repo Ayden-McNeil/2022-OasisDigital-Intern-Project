@@ -5,29 +5,22 @@ using UnityEngine;
 public class OnlineProjectile : MonoBehaviour{
 
     [SerializeField] private float lifeTime = 5;     //How long the gameobject lasts
-    [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip shootSound;
+    [SerializeField] private ParticleSystem explosionParticle;
+    static private OnlineTargetSpawner onlineTargetSpawner;
+
+
     public bool myProjectile;
 
     private AudioSource audioSource;
 
     void Start()
     {
+        onlineTargetSpawner = FindObjectOfType<OnlineTargetSpawner>();
         gameObject.GetComponent<Renderer>().material.color = RandomColor();
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(shootSound);
         Destroy(gameObject, lifeTime);
-    }
-
-    private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Target")
-        {
-            audioSource.PlayOneShot(hitSound);
-            if (myProjectile)
-            {
-                GameObject.Find("OnlineGameManager").GetComponent<OnlineGameManager>().DestroyedTarget();
-            }
-        }
     }
 
     private Color RandomColor(){

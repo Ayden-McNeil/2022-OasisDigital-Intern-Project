@@ -2,41 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 public class OnlinePlayerController : NetworkBehaviour
 {
     Rigidbody body;
+    [SerializeField] private GameObject focalPoint;
     private float xMouse;
     private float yMouse;
     private float xRotation;
     private float yRotation;
-    [SerializeField] private float xSensitivity = 10f;
-    [SerializeField] private float ySensitivity = 10f;
+    private float xSensitivity = 10f;
+    private float ySensitivity = 10f;
     private int xInput = 0;
     private int lastXInput = 0;
     private int zInput = 0;
     private int lastZInput = 0;
-    public float speed = 10.0f;
+    private float speed = 10.0f;
     private Vector3 moveVector;
-
+    private float myProjectileSpeed = 75f;
+    [Header("Passover Variables")]
     public float sensVar;
     public int fovVar;
     public int povVar;
     
     private Camera mainCamera;
+    [Header("Cameras")]
     public Camera playerCameraFP;           //First Person Camera
     public Camera playerCameraTP;           //Third Person Camera
-    static private bool doesNotHaveCamera = true;
 
     private OnlineGameManager gameManagerScript;
     private NetworkIdentity networkIdentity;
-
-    [SerializeField] private GameObject focalPoint;
+    [Header("Gun Scene Variables")]
     [SerializeField] private GameObject pointer;
     [SerializeField] private GameObject frontOfTheGun;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private Animator gunAnimator;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private GameObject targetSpawner;
+
+    [Header("Username Variables")]
+    [SerializeField] private TextMeshProUGUI usernameText;
 
 
     private void Start()
@@ -46,15 +51,14 @@ public class OnlinePlayerController : NetworkBehaviour
         networkIdentity = GetComponent<NetworkIdentity>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
 
-
-        if (isLocalPlayer && doesNotHaveCamera)
+        if (isLocalPlayer)
         {
             GetPassoverValues();
+            usernameText.text = sceneVarPassover.username;
         }
         else
         {
-            playerCameraFP.gameObject.SetActive(false);
-            playerCameraTP.gameObject.SetActive(false);
+            Destroy(GetComponent<Rigidbody>());
         }
     }
 
@@ -65,6 +69,7 @@ public class OnlinePlayerController : NetworkBehaviour
             DoRayCast();
             if (!gameManagerScript.isGamePaused)
             {
+                UpdateMyProjectileSpeed();
                 RotateCamera();
                 CheckShoot();
                 Move();
@@ -74,37 +79,50 @@ public class OnlinePlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        body.angularVelocity = new Vector3(0,0,0);
         if (isLocalPlayer)
         {
-            body.velocity = moveVector;
+            body.angularVelocity = new Vector3(0,0,0);
+            body.velocity = new Vector3(moveVector.x, body.velocity.y, moveVector.z);
+        }
+    }
+
+    private void UpdateMyProjectileSpeed()
+    {
+        float mouseChange = Input.GetAxis("Mouse ScrollWheel");
+        if (mouseChange != 0)
+        {
+            myProjectileSpeed += mouseChange * 25;
+            myProjectileSpeed = Mathf.Clamp(myProjectileSpeed, 5, 75);
         }
     }
 
     void CheckShoot()
     {
-        if (Input.GetMouseButtonDown(0) && !gameManagerScript.isGameOver && !gameManagerScript.isGamePaused)
+        if (Input.GetMouseButtonDown(0))
         {
+            gunAnimator.SetTrigger("TriggerRecoil");
             Vector3 spawnPosition = frontOfTheGun.transform.position;
-            Vector3 direction = (GetRayCast() - frontOfTheGun.transform.position).normalized;
-            SpawnProjectileCmd(spawnPosition, direction, networkIdentity.netId);
+            SpawnProjectileCmd(spawnPosition, GetRayCast(), myProjectileSpeed, networkIdentity.netId);
         }
     }
 
     [Command]
-    void SpawnProjectileCmd(Vector3 spawnPosition, Vector3 direction, uint ID)
+    void SpawnProjectileCmd(Vector3 spawnPosition, Vector3 endPosition, float projectileSpeed, uint ID)
     {
-        SpawnProjectileRpc(spawnPosition, direction, ID);
+        SpawnProjectileRpc(spawnPosition, endPosition, projectileSpeed, ID);
     }
 
     [ClientRpc]
-    void SpawnProjectileRpc(Vector3 spawnPosition, Vector3 direction, uint ID)
+    void SpawnProjectileRpc(Vector3 spawnPosition, Vector3 endPosition, float projectileSpeed, uint ID)
     {
         GameObject spawnedProjectile = Instantiate(projectile, spawnPosition, Quaternion.identity);
-        spawnedProjectile.GetComponent<OnlineProjectile>().myProjectile = ID == networkIdentity.netId;
-        spawnedProjectile.GetComponent<Rigidbody>().velocity = direction * 50;
+        spawnedProjectile.GetComponent<Rigidbody>().velocity = (endPosition - spawnPosition).normalized * projectileSpeed;
+        if (isLocalPlayer)
+        {
+            spawnedProjectile.GetComponent<OnlineProjectile>().myProjectile = ID == networkIdentity.netId;
+        }
     }
-
+    
     void Move()
     {
         xInput = 0;
@@ -139,7 +157,6 @@ public class OnlinePlayerController : NetworkBehaviour
             lastZInput = zInput;
         }
         moveVector = (transform.forward * zInput + transform.right * xInput).normalized * speed;
-        moveVector.y = body.velocity.y;
     }
 
     void RotateCamera()
@@ -193,6 +210,5 @@ public class OnlinePlayerController : NetworkBehaviour
         }
         mainCamera.fieldOfView = fovVar;
         mainCamera.gameObject.SetActive(true);
-        doesNotHaveCamera = true;
     }
 }
