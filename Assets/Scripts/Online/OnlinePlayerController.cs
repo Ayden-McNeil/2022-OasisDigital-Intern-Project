@@ -29,7 +29,7 @@ public class OnlinePlayerController : NetworkBehaviour
     static private bool doesNotHaveCamera = true;
 
     private OnlineGameManager gameManagerScript;
-    private OnlineTargetSpawner targetSpawnerScript;
+    private NetworkIdentity networkIdentity;
 
     [SerializeField] private GameObject focalPoint;
     [SerializeField] private GameObject pointer;
@@ -38,10 +38,12 @@ public class OnlinePlayerController : NetworkBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject targetSpawner;
 
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
+        networkIdentity = GetComponent<NetworkIdentity>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
 
 
@@ -85,20 +87,21 @@ public class OnlinePlayerController : NetworkBehaviour
         {
             Vector3 spawnPosition = frontOfTheGun.transform.position;
             Vector3 direction = (GetRayCast() - frontOfTheGun.transform.position).normalized;
-            SpawnProjectileCmd(spawnPosition, direction);
+            SpawnProjectileCmd(spawnPosition, direction, networkIdentity.netId);
         }
     }
 
     [Command]
-    void SpawnProjectileCmd(Vector3 spawnPosition, Vector3 direction)
+    void SpawnProjectileCmd(Vector3 spawnPosition, Vector3 direction, uint ID)
     {
-        SpawnProjectileRpc(spawnPosition, direction);
+        SpawnProjectileRpc(spawnPosition, direction, ID);
     }
 
     [ClientRpc]
-    void SpawnProjectileRpc(Vector3 spawnPosition, Vector3 direction)
+    void SpawnProjectileRpc(Vector3 spawnPosition, Vector3 direction, uint ID)
     {
         GameObject spawnedProjectile = Instantiate(projectile, spawnPosition, Quaternion.identity);
+        spawnedProjectile.GetComponent<OnlineProjectile>().myProjectile = ID == networkIdentity.netId;
         spawnedProjectile.GetComponent<Rigidbody>().velocity = direction * 50;
     }
 

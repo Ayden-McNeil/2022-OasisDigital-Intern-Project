@@ -7,6 +7,7 @@ public class OnlineProjectile : MonoBehaviour{
     [SerializeField] private float lifeTime = 5;     //How long the gameobject lasts
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip shootSound;
+    public bool myProjectile;
 
     private AudioSource audioSource;
 
@@ -22,6 +23,10 @@ public class OnlineProjectile : MonoBehaviour{
         if(other.gameObject.tag == "Target")
         {
             audioSource.PlayOneShot(hitSound);
+            if (myProjectile)
+            {
+                GameObject.Find("OnlineGameManager").GetComponent<OnlineGameManager>().DestroyedTarget();
+            }
         }
     }
 
