@@ -6,28 +6,31 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class OfflineGameManager : MonoBehaviour{
-
+    [Header("Text Elements")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI endScoreText;
     [SerializeField] public TextMeshProUGUI accrucaryText;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI countDownText;
+
+    [Header("Game Pannels")]
     [SerializeField] private GameObject endPanel; 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject highScoreMenu;
-    [SerializeField] private GameObject leaderboardManager;
-    private LeaderboardController leaderboardController;
-    [SerializeField] private TextMeshProUGUI countDownText;
+
+    [Header("Misc.")]
+    [SerializeField] private LeaderboardController leaderboardController;
     [SerializeField] private AudioSource audiosource;
     [SerializeField] private GameObject player;
 
+    [Header("Varaibles")]
     [SerializeField] private int countDownNumber = 3;
-
-    private int score = 0;
+    [SerializeField] private float time = 30;
     public bool isGameOver = false;
     public bool isGameStarted = false;
     public bool isGamePaused = false;
-    [SerializeField] private float time = 30;
     public int numberOfTimesMouseClicked = 0;
+    private int score = 0;
 
     void Start()
     {
