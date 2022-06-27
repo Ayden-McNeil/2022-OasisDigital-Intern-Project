@@ -138,22 +138,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  xSensitivity: 10
-  ySensitivity: 10
-  speed: 10
+  focalPoint: {fileID: 1514475476427963872}
   sensVar: 4
   fovVar: 90
   povVar: 0
   playerCameraFP: {fileID: 7770448642259835648}
   playerCameraTP: {fileID: 7542054642749686666}
-  focalPoint: {fileID: 1514475476427963872}
   pointer: {fileID: 1586298647773361182}
   frontOfTheGun: {fileID: 5408250887222520007}
   projectile: {fileID: 7508958596466095598, guid: b7cc4e43324d9be4a8e0e70803a6c297, type: 3}
+  gunAnimator: {fileID: 1088785406910115961}
   layerMask:
     serializedVersion: 2
     m_Bits: 55
-  targetSpawner: {fileID: 0}
 --- !u!54 &7228752935386275408
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -582,6 +579,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f5d9636589c6d14fad1b7f7e955ba09, type: 3}
+--- !u!95 &1088785406910115961 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 821165579307202537, guid: 0f5d9636589c6d14fad1b7f7e955ba09, type: 3}
+  m_PrefabInstance: {fileID: 322422101705459600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5408250887222520007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5725357940424404823, guid: 0f5d9636589c6d14fad1b7f7e955ba09, type: 3}

@@ -40,8 +40,8 @@ public class OnlinePlayerController : NetworkBehaviour
     [SerializeField] private Animator gunAnimator;
     [SerializeField] private LayerMask layerMask;
 
-    [Header("Username Variables")]
-    [SerializeField] private TextMeshProUGUI usernameText;
+    //[Header("Username Variables")]
+    //[SerializeField] private TextMeshProUGUI usernameText;
 
 
     private void Start()
@@ -54,7 +54,7 @@ public class OnlinePlayerController : NetworkBehaviour
         if (isLocalPlayer)
         {
             GetPassoverValues();
-            usernameText.text = sceneVarPassover.username;
+            //usernameText.text = sceneVarPassover.username;
         }
         else
         {
