@@ -32,7 +32,7 @@ public class OfflineTarget : MonoBehaviour
             spawnManagerScript.SpawnTargets();
             spawnManagerScript.RemovePostionFromList(transform.position);
             gameManagerScript.ScoreKeeper(pointValue);
-            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            Destroy(Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation), 1);
             numberOfTargetsDestroyed++;
             gameManagerScript.accrucaryText.text = ((int)(OfflineTarget.numberOfTargetsDestroyed / (float)gameManagerScript.numberOfTimesMouseClicked * 100)).ToString() + "%";
 

@@ -15,7 +15,6 @@ public class OnlineGameManager : MonoBehaviour{
     [SerializeField] private AudioSource audiosource;
 
     private int score = 0;
-    public bool isGameOver = false;
     public bool isGamePaused = false;
     public int numberOfTimesMouseClicked = 0;
     private int numberOfTargetsDestroyed = 0;
@@ -25,7 +24,6 @@ public class OnlineGameManager : MonoBehaviour{
         audiosource.volume = sceneVarPassover.volume;
         OfflineTarget.numberOfTargetsDestroyed = 0;
         Time.timeScale = 1f;
-        isGameOver = false;
         scoreText.text = score.ToString();
     }
 
@@ -45,7 +43,7 @@ public class OnlineGameManager : MonoBehaviour{
 
     private void PauseFunction()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isGamePaused)
             {
@@ -77,7 +75,7 @@ public class OnlineGameManager : MonoBehaviour{
 
     private void CountMouseClicks()
     {
-        if (Input.GetMouseButtonDown(0) && !isGamePaused && !isGameOver)
+        if (Input.GetMouseButtonDown(0) && !isGamePaused)
         {
             numberOfTimesMouseClicked++;
             if (numberOfTimesMouseClicked > 0)

@@ -30,7 +30,7 @@ public class OnlineTargetSpawner: NetworkBehaviour
     {
         Vector3 oldPosition = targetObject.transform.position;
         targetObject.transform.position = GenerateRandomPosition();
-        AddPostionFromList(oldPosition);
+        AddPostionToList(oldPosition);
     }
 
     Vector3 GenerateRandomPosition()
@@ -41,75 +41,19 @@ public class OnlineTargetSpawner: NetworkBehaviour
         return position;
     }
 
-    public void AddPostionFromList(Vector3 position)
+    public void AddPostionToList(Vector3 position)
     {
         targetEmptyPositions.Add(position);
     }
 
     private void PopulateTargetEmptyPositions()
     {
-        for (int i = -gridHeight; i < gridHeight; i++)
+        for (int i = -gridLength; i < gridLength; i++)
         {
-            for (int j = -gridLength; j < gridLength; j++)
+            for (int j = -gridHeight; j < gridHeight; j++)
             {
-                targetEmptyPositions.Add(new Vector3(j, i, 0) + transform.position);
+                targetEmptyPositions.Add(new Vector3(i, j, 0) + transform.position);
             }
         }
     }
 }
-
-/*private void Start()
-{
-    private Dictionary<int, GameObject> targetDictionary = new Dictionary<int, GameObject>();
-    if (isServer)
-    {
-        PopulateTargetEmptyPositions();
-        SpawnTargetsCmd();
-    }
-}
-
-[Command]
-private void SpawnTargetsCmd()
-{
-    for (int i = 0; i < startingTargetNumber; i++)
-    {
-        Debug.Log("spawned a target on the server");
-        Vector3 position = GenerateRandomPosition();
-        GameObject spawnedTarget = Instantiate(target, position, target.transform.rotation);
-        targetDictionary.Add(spawnedTarget.GetComponent<OnlineTarget>().ID, spawnedTarget);
-    }
-}
-
-[Command(requiresAuthority = false)]
-public void OnPlayerJoins(GameObject player)
-{
-    for (int i = 0; i < startingTargetNumber; i++)
-    {
-        SpawnTargetRpc(player.GetComponent<NetworkIdentity>().connectionToClient, targetDictionary[i].transform.position);
-    }
-}
-
-[TargetRpc]
-private void SpawnTargetRpc(NetworkConnection player, Vector3 position)
-{
-    GameObject spawnedTarget = Instantiate(target, position, target.transform.rotation);
-    targetDictionary.Add(spawnedTarget.GetComponent<OnlineTarget>().ID, spawnedTarget);
-}
-
-[Command(requiresAuthority = false)]
-public void ChangeTagetPositionCmd(int ID)
-{
-    Vector3 position = GenerateRandomPosition();
-    targetDictionary[ID].transform.position = position;
-    ChangeTargetPositionRpc(ID, position);
-    targetEmptyPositions.Add(targetDictionary[ID].transform.position);
-
-
-}
-
-[ClientRpc]
-private void ChangeTargetPositionRpc(int ID, Vector3 newPosition)
-{
-    targetDictionary[ID].transform.position = newPosition;
-}*/
-
