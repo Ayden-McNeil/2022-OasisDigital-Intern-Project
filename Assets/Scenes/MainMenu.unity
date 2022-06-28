@@ -888,6 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcff0c536351e14782227627ea12b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernameInputField: {fileID: 0}
 --- !u!4 &511059071
 Transform:
   m_ObjectHideFlags: 0
