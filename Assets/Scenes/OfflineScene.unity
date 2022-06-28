@@ -1633,6 +1633,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -6490541782680688521, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: weaponCamera
+      value: 
+      objectReference: {fileID: 8668402557193904951}
+    - target: {fileID: -6490541782680688521, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: gameManagerScript
       value: 
       objectReference: {fileID: 5488468020092033039}
@@ -1651,6 +1655,14 @@ PrefabInstance:
     - target: {fileID: 1176838551650560085, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412573289500189431, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412573289500189431, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 1513361348582712859, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_RootOrder
@@ -1696,6 +1708,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2327907786483246768, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3443703311479634974, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1704,9 +1720,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4893537920410392960, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893537920410392960, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_ClearFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296245896683270912, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421145652545185413, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209368344799368822, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6285893309011490211, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_Name
       value: OfflinePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316772072547584632, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6945359011910682669, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1727,6 +1767,14 @@ PrefabInstance:
     - target: {fileID: 6945359011910682669, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375000641693318830, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721720171895640727, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
@@ -1778,6 +1826,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!20 &8668402557193904951 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4893537920410392960, guid: 3eb6d64f713f8ba4c985fa2c765a9353, type: 3}
+  m_PrefabInstance: {fileID: 8668402557193904946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9042550753862389696
 PrefabInstance:
   m_ObjectHideFlags: 0

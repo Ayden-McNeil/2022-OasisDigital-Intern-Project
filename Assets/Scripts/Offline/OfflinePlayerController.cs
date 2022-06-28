@@ -13,6 +13,7 @@ public class OfflinePlayerController : MonoBehaviour
     [SerializeField] private float xSensitivity = 10f;
     [SerializeField] private float ySensitivity = 10f;
     public Camera playerCameraFP;           //First Person Camera
+    public Camera weaponCamera;           //First Person Camera
     public Camera playerCameraTP;           //Third Person Camera
     private Camera mainCamera;
     public float sensVar;
@@ -126,6 +127,7 @@ public class OfflinePlayerController : MonoBehaviour
 
     void GetPassoverValues()
     {
+        weaponCamera.gameObject.SetActive(false);
         sensVar = sceneVarPassover.sens;
         fovVar = sceneVarPassover.fov;
         povVar = sceneVarPassover.pov;
@@ -137,6 +139,8 @@ public class OfflinePlayerController : MonoBehaviour
         else
         {
             mainCamera = playerCameraFP;
+            weaponCamera.fieldOfView = fovVar;
+            weaponCamera.gameObject.SetActive(true);
         }
         mainCamera.fieldOfView = fovVar;
         mainCamera.gameObject.SetActive(true);
