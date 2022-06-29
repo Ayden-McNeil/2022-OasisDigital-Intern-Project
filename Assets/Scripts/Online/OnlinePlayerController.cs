@@ -7,6 +7,11 @@ using TMPro;
 public class OnlinePlayerController : NetworkBehaviour
 {
     Rigidbody body;
+
+    PlayerInfo myPlayerInfo;
+    string myUsername;
+    static int playerCount = 0;
+
     [SerializeField] private GameObject focalPoint;
     private float xMouse;
     private float yMouse;
@@ -25,14 +30,14 @@ public class OnlinePlayerController : NetworkBehaviour
     public float sensVar;
     public int fovVar;
     public int povVar;
-    
+
     private Camera mainCamera;
     [Header("Cameras")]
     public Camera playerCameraFP;           //First Person Camera
     public Camera playerCameraTP;           //Third Person Camera
 
     private OnlineGameManager gameManagerScript;
-    private NetworkIdentity networkIdentity;
+    private NetworkIdentity myNetworkIdentity;
     [Header("Gun Scene Variables")]
     [SerializeField] private GameObject pointer;
     [SerializeField] private GameObject frontOfTheGun;
@@ -40,26 +45,54 @@ public class OnlinePlayerController : NetworkBehaviour
     [SerializeField] private Animator gunAnimator;
     [SerializeField] private LayerMask layerMask;
 
-    //[Header("Username Variables")]
-    //[SerializeField] private TextMeshProUGUI usernameText;
+    [Header("Username Variables")]
+    [SerializeField] private TextMeshProUGUI usernameText;
 
+    private List<PlayerInfo> playerInfoList = new List<PlayerInfo>();
 
     private void Start()
     {
+        playerCount++;
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
-        networkIdentity = GetComponent<NetworkIdentity>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
+
+        myNetworkIdentity = GetComponent<NetworkIdentity>();
+        myUsername = sceneVarPassover.username;
+        myPlayerInfo = new PlayerInfo { ID = myNetworkIdentity.netId, networkIdentity = myNetworkIdentity, username = myUsername };
 
         if (isLocalPlayer)
         {
             GetPassoverValues();
-            //usernameText.text = sceneVarPassover.username;
+            //AddNewUsernameCmd(myPlayerInfo);
         }
         else
         {
             Destroy(GetComponent<Rigidbody>());
         }
+    }
+    /*
+    [Command]
+    private void AddNewUsernameCmd(PlayerInfo playerInfo)
+    {
+        for (int i = 0; i < playerInfoList.Count; i++)
+        {
+            AddNewUsernameTarget(playerInfoList[i].networkIdentity.connectionToClient, playerInfoList[i].username);
+        }
+        playerInfoList.Add(playerInfo);
+        UpdateNewUsernameRpc(playerInfo.username);
+    }
+
+    [ClientRpc]
+    private void UpdateNewUsernameRpc(string newUsername)
+    {
+        usernameText.text = newUsername;
+    }
+
+    [TargetRpc]
+    private void AddNewUsernameTarget(NetworkConnection target, string username)
+    {
+        usernameText.text = username;
     }
 
     private void Update()
@@ -75,13 +108,13 @@ public class OnlinePlayerController : NetworkBehaviour
                 Move();
             }
         }
-    }
+    }*/
 
     private void FixedUpdate()
     {
         if (isLocalPlayer)
         {
-            body.angularVelocity = new Vector3(0,0,0);
+            body.angularVelocity = new Vector3(0, 0, 0);
             body.velocity = new Vector3(moveVector.x, body.velocity.y, moveVector.z);
         }
     }
@@ -102,7 +135,7 @@ public class OnlinePlayerController : NetworkBehaviour
         {
             gunAnimator.SetTrigger("TriggerRecoil");
             Vector3 spawnPosition = frontOfTheGun.transform.position;
-            SpawnProjectileCmd(spawnPosition, GetRayCast(), myProjectileSpeed, networkIdentity.netId);
+            SpawnProjectileCmd(spawnPosition, GetRayCast(), myProjectileSpeed, myNetworkIdentity.netId);
         }
     }
 
@@ -119,10 +152,10 @@ public class OnlinePlayerController : NetworkBehaviour
         spawnedProjectile.GetComponent<Rigidbody>().velocity = (endPosition - spawnPosition).normalized * projectileSpeed;
         if (isLocalPlayer)
         {
-            spawnedProjectile.GetComponent<OnlineProjectile>().myProjectile = ID == networkIdentity.netId;
+            spawnedProjectile.GetComponent<OnlineProjectile>().myProjectile = ID == myNetworkIdentity.netId;
         }
     }
-    
+
     void Move()
     {
         xInput = 0;
@@ -189,9 +222,9 @@ public class OnlinePlayerController : NetworkBehaviour
         Ray ray = mainCamera.ScreenPointToRay(centerScreenPosition);
         if (Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, layerMask))
         {
-           return rayCastHit.point;
+            return rayCastHit.point;
         }
-        return new Vector3(0,0,0);
+        return new Vector3(0, 0, 0);
     }
 
     void GetPassoverValues()
@@ -211,4 +244,11 @@ public class OnlinePlayerController : NetworkBehaviour
         mainCamera.fieldOfView = fovVar;
         mainCamera.gameObject.SetActive(true);
     }
+}
+
+public struct PlayerInfo
+{
+    public uint ID;
+    public NetworkIdentity networkIdentity;
+    public string username;
 }
