@@ -48,7 +48,7 @@ public class OnlinePlayerController : NetworkBehaviour
     [Header("Username Variables")]
     [SerializeField] private TextMeshProUGUI usernameText;
 
-    private List<PlayerInfo> playerInfoList = new List<PlayerInfo>();
+    static private List<PlayerInfo> playerInfoList = new List<PlayerInfo>();
 
     private void Start()
     {
@@ -57,43 +57,52 @@ public class OnlinePlayerController : NetworkBehaviour
         body = GetComponent<Rigidbody>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
 
-        myNetworkIdentity = GetComponent<NetworkIdentity>();
-        myUsername = sceneVarPassover.username;
-        myPlayerInfo = new PlayerInfo { ID = myNetworkIdentity.netId, networkIdentity = myNetworkIdentity, username = myUsername };
-
         if (isLocalPlayer)
         {
             GetPassoverValues();
-            //AddNewUsernameCmd(myPlayerInfo);
+            myNetworkIdentity = GetComponent<NetworkIdentity>();
+            myUsername = sceneVarPassover.username;
+            myPlayerInfo = new PlayerInfo { ID = myNetworkIdentity.netId, networkIdentity = myNetworkIdentity, username = myUsername };
+            Debug.Log(myPlayerInfo.ID);
+            Debug.Log(myPlayerInfo.username);
+            AddNewUsernameCmd(myPlayerInfo);
         }
         else
         {
             Destroy(GetComponent<Rigidbody>());
+
         }
     }
-    /*
+    
     [Command]
     private void AddNewUsernameCmd(PlayerInfo playerInfo)
     {
         for (int i = 0; i < playerInfoList.Count; i++)
         {
-            AddNewUsernameTarget(playerInfoList[i].networkIdentity.connectionToClient, playerInfoList[i].username);
+            //AddNewUsernameTarget(playerInfo.networkIdentity.connectionToClient, playerInfoList[i].username);
+            //Debug.Log("called target rpc: " + playerInfoList[i].username);
         }
         playerInfoList.Add(playerInfo);
+        Debug.Log("Added a player: " + playerInfoList.Count);
         UpdateNewUsernameRpc(playerInfo.username);
     }
 
     [ClientRpc]
-    private void UpdateNewUsernameRpc(string newUsername)
+    private void UpdateNewUsernameRpc(string username)
     {
-        usernameText.text = newUsername;
+        Debug.Log("I am runnign the client rpc: " + username);
+
+        usernameText.text = username;
     }
 
     [TargetRpc]
     private void AddNewUsernameTarget(NetworkConnection target, string username)
     {
-        usernameText.text = username;
-    }*/
+        Debug.Log("I am runnign the target rpc: " + username);
+        myUsername = username;
+        usernameText.text = myUsername;
+
+    }
 
     private void Update()
     {
@@ -243,6 +252,20 @@ public class OnlinePlayerController : NetworkBehaviour
         }
         mainCamera.fieldOfView = fovVar;
         mainCamera.gameObject.SetActive(true);
+    }
+
+    [Server]
+    private void OnDestroy()
+    {
+        for (int i = 0; i < playerInfoList.Count; i++)
+        {
+            if (myNetworkIdentity.netId == playerInfoList[i].ID)
+            {
+                playerInfoList.RemoveAt(i);
+                Debug.Log("Removed a player:" + playerInfoList.Count);
+                return;
+            }
+        }
     }
 }
 
