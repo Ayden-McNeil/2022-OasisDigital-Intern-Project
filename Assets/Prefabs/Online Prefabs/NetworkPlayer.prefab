@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 9118188835609161418}
   - component: {fileID: -8430295384670473209}
   - component: {fileID: 4417276495504693540}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NetworkPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,6 +151,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 55
+  usernameText: {fileID: 0}
 --- !u!54 &7228752935386275408
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -289,7 +290,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

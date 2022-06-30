@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 9114202662028187985}
   - component: {fileID: 4972268259604701395}
   - component: {fileID: -6490541782680688521}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OfflinePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
