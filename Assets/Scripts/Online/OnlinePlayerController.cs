@@ -9,8 +9,7 @@ public class OnlinePlayerController : NetworkBehaviour
     Rigidbody body;
 
     PlayerInfo myPlayerInfo;
-    string myUsername;
-    static int playerCount = 0;
+    string myUsername = "";
 
     [SerializeField] private GameObject focalPoint;
     private float xMouse;
@@ -52,25 +51,21 @@ public class OnlinePlayerController : NetworkBehaviour
 
     private void Start()
     {
-        playerCount++;
+        GetPassoverValues();
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
+        myNetworkIdentity = GetComponent<NetworkIdentity>();
+        myPlayerInfo = new PlayerInfo { player = gameObject, ID = myNetworkIdentity.netId, networkIdentity = myNetworkIdentity, username = myUsername };
+        playerInfoList.Add(myPlayerInfo);
 
         if (isLocalPlayer)
-        {
-            GetPassoverValues();
-            myNetworkIdentity = GetComponent<NetworkIdentity>();
-            myUsername = sceneVarPassover.username;
-            myPlayerInfo = new PlayerInfo { ID = myNetworkIdentity.netId, networkIdentity = myNetworkIdentity, username = myUsername };
-            Debug.Log(myPlayerInfo.ID);
-            Debug.Log(myPlayerInfo.username);
+        { 
             AddNewUsernameCmd(myPlayerInfo);
         }
         else
         {
             Destroy(GetComponent<Rigidbody>());
-
         }
     }
     
@@ -79,8 +74,8 @@ public class OnlinePlayerController : NetworkBehaviour
     {
         for (int i = 0; i < playerInfoList.Count; i++)
         {
-            //AddNewUsernameTarget(playerInfo.networkIdentity.connectionToClient, playerInfoList[i].username);
-            //Debug.Log("called target rpc: " + playerInfoList[i].username);
+            AddNewUsernameTarget(playerInfo.networkIdentity.connectionToClient, playerInfoList[i]);
+            Debug.Log("called target rpc: " + playerInfoList[i].username);
         }
         playerInfoList.Add(playerInfo);
         Debug.Log("Added a player: " + playerInfoList.Count);
@@ -91,17 +86,20 @@ public class OnlinePlayerController : NetworkBehaviour
     private void UpdateNewUsernameRpc(string username)
     {
         Debug.Log("I am runnign the client rpc: " + username);
-
         usernameText.text = username;
     }
 
     [TargetRpc]
-    private void AddNewUsernameTarget(NetworkConnection target, string username)
+    private void AddNewUsernameTarget(NetworkConnection target, PlayerInfo playerInfoOtherPerson)
     {
-        Debug.Log("I am runnign the target rpc: " + username);
-        myUsername = username;
-        usernameText.text = myUsername;
-
+        Debug.Log("I am runnign the target rpc: " + playerInfoOtherPerson.username);
+        for (int i = 0; i < playerInfoList.Count; i++)
+        {
+            if (playerInfoList[i].ID == playerInfoOtherPerson.ID)
+            {
+                playerInfoList[i].player.GetComponentInChildren<TextMeshProUGUI>().text = playerInfoOtherPerson.username;
+            }
+        }
     }
 
     private void Update()
@@ -238,23 +236,26 @@ public class OnlinePlayerController : NetworkBehaviour
 
     void GetPassoverValues()
     {
-        sensVar = sceneVarPassover.sens;
-        fovVar = sceneVarPassover.fov;
-        povVar = sceneVarPassover.pov;
+        if (isLocalPlayer)
+        {
+            sensVar = sceneVarPassover.sens;
+            fovVar = sceneVarPassover.fov;
+            povVar = sceneVarPassover.pov;
 
-        if (povVar == 3)
-        {
-            mainCamera = playerCameraTP;
+            if (povVar == 3)
+            {
+                mainCamera = playerCameraTP;
+            }
+            else
+            {
+                mainCamera = playerCameraFP;
+            }
+            mainCamera.fieldOfView = fovVar;
+            mainCamera.gameObject.SetActive(true);
+            myUsername = sceneVarPassover.username;
         }
-        else
-        {
-            mainCamera = playerCameraFP;
-        }
-        mainCamera.fieldOfView = fovVar;
-        mainCamera.gameObject.SetActive(true);
     }
 
-    [Server]
     private void OnDestroy()
     {
         for (int i = 0; i < playerInfoList.Count; i++)
@@ -271,6 +272,7 @@ public class OnlinePlayerController : NetworkBehaviour
 
 public struct PlayerInfo
 {
+    public GameObject player;
     public uint ID;
     public NetworkIdentity networkIdentity;
     public string username;
