@@ -27,6 +27,6 @@ public class OfflineProjectileSpawner : MonoBehaviour
     {
       Vector3 offset = hand.transform.position;
       //offset.z += (float)-.5;
-      this.transform.position = offset;
+      //this.transform.position = offset;
     }
   }
