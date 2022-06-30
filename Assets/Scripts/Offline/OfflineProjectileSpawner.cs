@@ -14,4 +14,19 @@ public class OfflineProjectileSpawner : MonoBehaviour
         GameObject spawnProjectile = Instantiate(projectile, frontOfTheGun.transform.position, Quaternion.identity);
         spawnProjectile.GetComponent<Rigidbody>().velocity = (pointer.transform.position - frontOfTheGun.transform.position).normalized * speed;
     }
-}
+
+
+  public GameObject hand;
+  public float offsetAmount = (float)-.5;
+
+  private void Start()
+    {
+      hand = GameObject.Find("mixamorig:RightHand");
+    }
+  private void Update()
+    {
+      Vector3 offset = hand.transform.position;
+      //offset.z += (float)-.5;
+      //this.transform.position = offset;
+    }
+  }
