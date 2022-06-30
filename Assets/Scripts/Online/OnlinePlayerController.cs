@@ -53,6 +53,7 @@ public class OnlinePlayerController : NetworkBehaviour
     private void Start()
     {
         playerCount++;
+        gameObject.transform.position = new Vector3(0,3,-13);
         Cursor.lockState = CursorLockMode.Locked;
         body = GetComponent<Rigidbody>();
         gameManagerScript = FindObjectOfType<OnlineGameManager>();
